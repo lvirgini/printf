@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 16:09:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/28 15:03:41 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:47:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int		ft_dispatch_type(const char *format, unsigned int *i,
 						va_list args, t_flag *flag)
 {
-	ft_size_type(format, i, args, flag);	
+	ft_size_type(format, i, args, flag);
 	if (flag->arg_error)
 	{
 		write(1, "%%", 1);
@@ -36,7 +36,7 @@ int		ft_dispatch_type(const char *format, unsigned int *i,
 		print_int(flag, ft_lltoa(flag->arg));
 	else if (format[*i] == 'u')
 		print_int(flag, ft_ulltoa(flag->uarg));
-	else if (format[*i] == 'x'|| format[*i] == 'X')
+	else if (format[*i] == 'x' || format[*i] == 'X')
 		print_hexa(flag, (convert_hexadecimal(flag)));
 	return (*i + 1);
 }
@@ -73,17 +73,18 @@ void	ft_size_type(const char *format, unsigned int *i,
 void	ft_type_classic(const char *format, unsigned int *i,
 					va_list args, t_flag *flag)
 {
-		if ((ft_strchr("di", format[*i])))
-			flag->arg = (int)va_arg(args, int);
-		else if ((ft_strchr("uxX", format[*i])))
-			flag->uarg = (unsigned int)va_arg(args, unsigned int);
-		else if ((format[*i] == 'p'))
-			flag->uarg = (ULL)va_arg(args, ULL);
-		else if(ft_strchr("cs", format[*i]))
-			return;
-		else
-			flag->arg_error = 1;
+	if ((ft_strchr("di", format[*i])))
+		flag->arg = (int)va_arg(args, int);
+	else if ((ft_strchr("uxX", format[*i])))
+		flag->uarg = (unsigned int)va_arg(args, unsigned int);
+	else if ((format[*i] == 'p'))
+		flag->uarg = (ULL)va_arg(args, ULL);
+	else if (ft_strchr("cs", format[*i]))
+		return ;
+	else
+		flag->arg_error = 1;
 }
+
 /*
 ** Récupère l'argument avec les flags (l) ou (ll).
 */
@@ -109,8 +110,8 @@ void	ft_type_long(const char *format, unsigned int *i,
 			flag->arg = (long)va_arg(args, long);
 		else if ((ft_strchr("uxX", format[*i + 1])))
 			flag->uarg = (unsigned long int)va_arg(args, unsigned long int);
-		//else if (format[*i + 1] == 's')
-		//	str_unicode(flag);
+	//	else if (format[*i + 1] == 's')
+	//		str_unicode(flag);
 		else if (format[*i + 1] == 'c')
 			c_unicode(args, flag);
 		else

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:28:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/25 19:53:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:43:52 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ void	print_character(va_list args, t_flag *flag)
 	char			*s;
 	char			c;
 	char			*(*f)(int, char, char *, int *);
-	
-	
+
 	c = va_arg(args, int);
 	s = ft_strdup(&c);
 	len = 1;
 	if (flag->left == 1)
 		f = &print_after;
-	else 
+	else
 		f = &print_before;
 	if (flag->width > 1)
 		s = f(flag->width, ' ', s, &len);
@@ -51,13 +50,13 @@ void	print_string(va_list args, t_flag *flag)
 	s = va_arg(args, char *);
 	if (!s)
 	{
-		if(flag->precision < 6 && flag->precision != -1)
+		if (flag->precision < 6 && flag->precision != -1)
 			s = "";
 		else
-		s = "(null)";
+			s = "(null)";
 	}
 	len = ft_strlen(s);
-	if(flag->precision < len && flag->precision != -1)
+	if (flag->precision < len && flag->precision != -1)
 		len = flag->precision;
 	s = ft_substr(s, 0, len);
 	if (flag->left == 1)

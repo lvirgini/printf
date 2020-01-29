@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verification.c                                     :+:      :+:    :+:   */
+/*   collect_flags.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 14:47:16 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/25 19:42:03 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:11:01 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int		ft_is_specific(const char *s, unsigned int *i)
 ** verifie la precision
 */
 
-static void		ft_precision_is_digit(const char *s, unsigned int *i, t_flag *flag)
+static void		ft_precision_is_digit(const char *s, unsigned int *i,
+									t_flag *flag)
 {
 	char			*tmp;
 	unsigned int	j;
@@ -46,7 +47,8 @@ static void		ft_precision_is_digit(const char *s, unsigned int *i, t_flag *flag)
 	}
 }
 
-static void		ft_precision(const char *s, unsigned int *i, va_list args, t_flag *flag)
+static void		ft_precision(const char *s, unsigned int *i,
+							va_list args, t_flag *flag)
 {
 	int		neg;
 
@@ -69,8 +71,8 @@ static void		ft_precision(const char *s, unsigned int *i, va_list args, t_flag *
 		flag->precision = 0;
 	if (neg == -1 && flag->precision != 0)
 	{
-			flag->width = flag->precision;
-			flag->precision = 0;
+		flag->width = flag->precision;
+		flag->precision = 0;
 	}
 }
 
@@ -78,14 +80,15 @@ static void		ft_precision(const char *s, unsigned int *i, va_list args, t_flag *
 **	largeur de champs digital
 */
 
-static void		ft_width_digit(const char *format, unsigned int *i, t_flag *flag)
+static void		ft_width_digit(const char *format, unsigned int *i,
+						t_flag *flag)
 {
 	unsigned int	j;
 
 	j = 0;
 	while (ft_isdigit(format[*i + j]))
 		++j;
-	flag->width = (ft_atoi(ft_substr(format, *i, j)));					 // MALLOC
+	flag->width = (ft_atoi(ft_substr(format, *i, j)));				 // MALLOC
 	*i += j - 1;
 }
 
@@ -93,7 +96,7 @@ static void		ft_width_digit(const char *format, unsigned int *i, t_flag *flag)
 ** Determination de toutes les options précédent le type à afficher.
 */
 
-int			ft_what_options(const char *format, unsigned int *i,
+int				ft_what_options(const char *format, unsigned int *i,
 						va_list args, t_flag *flag)
 {
 	while ((*i += 1) && ft_is_specific(format, i))
@@ -115,7 +118,7 @@ int			ft_what_options(const char *format, unsigned int *i,
 	if (format[*i] == '%' && (flag->total_print += 1))
 	{
 		write(1, "%%", 1);
-		return(*i + 1);
+		return (*i + 1);
 	}
 	return (ft_dispatch_type(format, i, args, flag));
 }

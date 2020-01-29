@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:39:07 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/22 23:51:06 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:44:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_int(t_flag *flag, char *s)
 		if (flag->zero && flag->width > len && flag->left == 0)
 			s = f(flag->width, '0', s, &len);
 		f = &print_before;
-		if (flag->left == 1) 
+		if (flag->left == 1)
 			f = &print_after;
 		if (flag->width > len)
 			s = f(flag->width, ' ', s, &len);

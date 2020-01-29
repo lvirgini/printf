@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:47:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/23 10:56:00 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:12:50 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_flag	*ft_initialize_struct(void)
 ** Free de la structure et renvoie le total imprimé par printf.
 */
 
-static int		ft_clean_end(t_flag	*flag)
+static int		ft_clean_end(t_flag *flag)
 {
 	int total_print;
 
@@ -62,7 +62,7 @@ static int		ft_clean_end(t_flag	*flag)
 int				ft_printf(const char *restrict format, ...)
 {
 	unsigned int	i;
-	unsigned int 	len;
+	unsigned int	len;
 	va_list			args;
 	t_flag			*flag;
 

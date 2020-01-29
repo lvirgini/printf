@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 14:43:58 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/23 13:53:46 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:08:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_putstr_fd_maxlen(char *s, int fd, unsigned int max)
 		i = 0;
 		while (s[i] && i < max)
 			++i;
-		write(fd, s, max);;
+		write(fd, s, max);
 	}
 }
 
@@ -34,12 +34,12 @@ void	ft_putstr_fd_maxlen(char *s, int fd, unsigned int max)
 ** 	Renvoie l'emplacement de la premiere occurence.
 */
 
-int 	ft_strchr_i(const char *s, int a)
+int		ft_strchr_i(const char *s, int a)
 {
 	unsigned int i;
 
 	i = 0;
 	while (s[i] && s[i] != a)
-			++i;
-	return(i);
+		++i;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:11:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/28 15:33:10 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:09:18 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*convert_hexadecimal(t_flag *flag)
 	i = flag->uarg;
 	while ((i /= 16) > 0)
 		++len;
-	if(!(result = malloc(sizeof(result) * (++len + 1))))
+	if (!(result = malloc(sizeof(result) * (++len + 1))))
 		return (NULL);
 	result[len] = '\0';
 	if (flag->uarg == 0)
@@ -62,9 +62,9 @@ char	*convert_adress(t_flag *flag)
 	i = flag->uarg;
 	while ((i /= 16) > 0)
 		++len;
-	if(len == 0 || !(result = malloc(sizeof(result) * (++len + 3))))
+	if (len == 0 || !(result = malloc(sizeof(result) * (++len + 3))))
 		return (NULL);
-	return(NULL);
+	return (NULL);
 	len += 2;
 	result[len] = '\0';
 	while (flag->uarg)
@@ -74,5 +74,5 @@ char	*convert_adress(t_flag *flag)
 	}
 	result[0] = '0';
 	result[1] = 'x';
-	return(result);
+	return (result);
 }
