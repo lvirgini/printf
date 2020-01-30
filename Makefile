@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2020/01/29 16:42:00 by lvirgini         ###   ########.fr        #
+#    Updated: 2020/01/29 16:24:37 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ CC = 		gcc
 
 CFLAGS = 	-Wall -Werror -Wextra
 
-COMP =		$(CC) $(CFLAGS)  $(LIBFT_H)
+COMP =		$(CC) $(CFLAGS) $(PRINTF_H) $(LIBFT_H)
 
 
 #	FONCTIONS	#
