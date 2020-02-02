@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:28:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 17:43:52 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 20:44:25 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
 ** Impression des CHAR
 */
 
-void	print_character(va_list args, t_flag *flag)
+void	print_character(t_flag *flag)
 {
 	int				len;
 	char			*s;
-	char			c;
 	char			*(*f)(int, char, char *, int *);
 
-	c = va_arg(args, int);
-	s = ft_strdup(&c);
-	len = 1;
+	s = (char_or_unicode(flag));
+	len = ft_strlen(s);
 	if (flag->left == 1)
 		f = &print_after;
 	else

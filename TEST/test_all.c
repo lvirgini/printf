@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:50:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/26 01:01:23 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 21:33:57 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include <limits.h>
 #include <locale.h>
 #include <stdio.h>
-#include "../ft_printf.h"
+#include "../src/libft.h"
+#include "ft_printf.h"
 
 
 
@@ -42,8 +43,8 @@ int main()
 
 	// PREMIERS TESTS :
 
-	printf(" |%d|\n", INTMIN);    		 // Warning %ld mais ok
-	ft_printf("f|%d|\n\n", INTMIN);
+	printf(" |%ld|\n", INTMIN);    		 // Warning %ld mais ok
+	ft_printf("f|%ld|\n\n", INTMIN);
 
 	printf(" |%d|\n", INTMAX);
 	ft_printf("f|%d|\n\n", INTMAX);
@@ -209,9 +210,9 @@ int main()
 	progra = ft_printf( "f|%12.0d|\n\n", -15);
 	print_error(origin, progra);
 
-	origin = printf("\n\n*------------------------------------------------------*\n");
-	origin = printf("*** **  *** 	CAS		[ %%xd ]:\n\n");
-	print_error(origin, progra);
+	printf("\n\n*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%xd ]:\n\n");
+
 
 	origin = printf( " |%1d|\n", 100);
 	progra = ft_printf( "f|%1d|\n\n", 100);
@@ -1410,7 +1411,7 @@ printf("\n\n\n\t\t\t..-* STRING *-..\n");
 
 
 printf("\n\n\n\t\t\t..-* CHAR C *-..\n");
-
+	setlocale(LC_ALL,"");
 
 	int c1 = 0;
 
@@ -1485,6 +1486,71 @@ printf("\n\n\n\t\t\t..-* CHAR C *-..\n");
 
 	printf(" |%-*c|\n", 30, c);
 	ft_printf("f|%-*c|\n\n", 30, c);
+
+printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
+	setlocale(LC_ALL,"");
+
+	// CHAR 0 | 'c' | 0 a 256 au dessus |
+	/*char c;
+
+	c = 0;
+	c = 'c';
+	wchar_t wc = L'𢁅';
+
+
+	//	printf("|%.0lc|\n", c);
+	//	ft_printf("|%.0lc|\n", c);
+
+	printf("\n\n*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%xd ]	avec x positif:  // 1\n\n");
+
+	printf( " |%1c|\n", wc);
+	ft_printf( "f|%1c|\n\n", wc);
+
+	printf( " |%3lc|\n", wc);
+	ft_printf( "f|%3lc|\n\n", wc);
+
+	printf( " |%30lc|\n", wc);
+	ft_printf( "f|%30lc|\n\n", wc);
+
+	printf("\n\n*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*d ]	avec * positif: // 2\n\n");
+
+	printf( " |%*lc|\n",1, wc);
+	ft_printf( "f|%*lc|\n\n", 1, wc);
+
+	printf( " |%*lc|\n", 3, wc);
+	ft_printf( "f|%*lc|\n\n", 3, wc);
+
+	printf( " |%*lc|\n", 30, wc);
+	ft_printf( "f|%*lc|\n\n", 30, wc);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%xd ]	avec x negatif : // 3\n\n");
+
+	printf(" |%-1lc|\n", wc);
+	ft_printf("f|%-1lc|\n\n", wc);
+
+	printf(" |%-30lc|\n", wc);
+	ft_printf("f|%-30lc|\n\n", wc);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*d ]	avec * negatif : / 4\n\n");
+
+	printf(" |%*lc|\n", -1, wc);
+	ft_printf("f|%*lc|\n\n", -1, wc);
+
+	printf(" |%*lc|\n", -0, wc);
+	ft_printf("f|%*lc|\n\n", -0, wc);
+
+	printf(" |%*lc|\n", -30, wc);
+	ft_printf("f|%*lc|\n\n", -30, wc);
+
+	printf(" |%-*lc|\n", -30, wc);
+	ft_printf("f|%-*lc|\n\n", -30, wc);
+
+	printf(" |%-*lc|\n", 30, wc);
+	ft_printf("f|%-*lc|\n\n", 30, wc);
 
 
 printf("\n\n\n\t\t\t..-* HEXADECIMAL *-..\n");
@@ -2002,6 +2068,9 @@ printf("\n\n\n\t\t\t..-* ADRESSE *-..\n");
 
 	printf( " |%30p|\n", p);
 	ft_printf( "f|%30p|\n\n", p);
+	
+	//	printf( " |%030p|\n", p);
+	//ft_printf( "f|%030p|\n\n", p);
 
 	printf("\n\n*------------------------------------------------------*\n");
 	printf("*** **  *** 	CAS		[ %%*d ]	avec * positif: // 2\n\n");
@@ -2060,7 +2129,32 @@ result = printf("le int max = %d\nuint max = %u\nune adresse = %p\nun hexadecima
 
 result2 = ft_printf("le int max = %d\nuint max = %u\nune adresse = %p\nun hexadecimal = %x et %X\nune chaine = %s\nun char = %c\n\n",
 	INTMAX, UMAX, cumul_ad, cumul_x, cumul_x, cumul_s, cumul_c);
+
 ft_printf("result 1 = %d\n result 2 = %d\n", result, result2);
+
+result = printf(" |%lhhlt|\n");
+result2 = ft_printf("f|%lhhlt|\n");
+ft_printf("result 1 = %d\nresult 2 = %d\n", result, result2);
+
+printf(" |%llu|\n", ULLONG_MAX);
+ft_printf("f|%llu|\n", (unsigned long long)~0);
+ft_printf("f|%llu|\n", ULLONG_MAX);
+
+printf("%u\n", (unsigned int)~0);
+ft_printf("%u\n", (unsigned int)~0);
+
+//printf("%d\n", (int)~(~(0) >> 1));
+//ft_printf("%d\n", (int)(-1 >> 1));
+
+printf("%lu\n", (unsigned long)~0);
+ft_printf("%lu\n", (unsigned long)~0);
+
+printf("%ld\n", (long)~0);
+ft_printf("%ld\n", (long)~0);
+
+//printf(" |%15.*% milieu %d|\n", 10, 25);
+//ft_printf("f|%15.*% milieu %d|\n",10, 25);
+
 
 printf(" |%lld|\n", cumul_ad);
 ft_printf("f|%lld|\n\n", cumul_ad);
@@ -2173,7 +2267,7 @@ ft_printf("%\\c\n", 98);
 //	ft_printf("f|%llx|\n\n", 140731234556040 );
 
 	printf("%lllkkkk\n", 5);
-	ft_printf("%lllkkkk\n", 5);*/
+	ft_printf("%lllkkkk\n", 5);
 
 
 
@@ -2213,11 +2307,16 @@ ft_printf("%\\c\n", 98);
 	printf("ls int * = %ls\n", str_unicode);
 	printf("s wchar * = %s\n", str2_unicode);
 	printf("ls wchar * = %ls\n", str2_unicode);
-
+*/
+	setlocale(LC_ALL, NULL);
 	wchar_t wc = L'𢁅';
 
 	printf(" |%4lc\n", wc);
 	ft_printf("f|%lc\n", wc);
+
+		printf(" |%c\n", 98);
+	ft_printf("f|%c\n", 98);
+
 return (0);
 
 }

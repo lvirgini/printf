@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:35:47 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/27 17:50:34 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 22:25:51 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,41 @@
 ** size < 24 : mask 2
 ** size < 32 : mask 3
 **
-**	///* diviser chaque octet du flag->arg et en faire un tableau : 
+**			diviser chaque octet du flag->arg et en faire un tableau : 
 ** char flag->arg[size] = [octet1][octet2][octet3][octet4]  ou l'inverse a verifier
 **
 ** write (1, flag->arg, size);
 */
+
+void print_binaire(unsigned wc)
+{
+	int i;
+	printf("%d en binaire :\t", wc);
+	for (i = 31; i >= 0; i--)
+	{
+		printf("%d", (wc >> i ) & 1);
+		if (i % 4 == 0)
+			printf(" ");
+	}
+	printf("\n"); 
+}
 
 
 /*
 **  Récupère la taille du wchar pour envoi en conversion
 */
 
-void		c_unicode(va_list args, t_flag *flag)
+char		*char_or_unicode(t_flag *flag)
 {
-	char 		size;
+	char 			size;
+	//unsigned char	octet[4];
+//	char			*s;
 
-	flag->uarg = va_arg(args, int);
-	size = -1;
-	while ((unsigned)flag->uarg >> ++size)
-		;
-	if (size < 8)
-		print_character(args, flag);
-	else
-		convert_unicode(flag, size);
+	size = 0;
+	while ((unsigned)flag->uarg >> size)
+		size++;
+	
+	return (convert_unicode(flag, size));
 }
 
 /*
@@ -75,17 +87,21 @@ void		c_unicode(va_list args, t_flag *flag)
 ** 
 */
 
-void		convert_unicode(t_flag *flag, char size)
+char		*convert_unicode(t_flag *flag, char size)
 {
 
-	unsigned char	octet[size];
-
-	if (size < 12)
+	unsigned char	octet[4];
+	char			*s;
+	
+	ft_bzero(octet, 4);
+	if (size < 8)
+		octet[0] = (unsigned char)flag->uarg;
+	else if (size < 12)
 	{
 		octet[0] = (((unsigned)flag->uarg >> 6) & WC2) | MB2;
-		octet[1] =((unsigned)flag->uarg & WC1) | MB1;
+		octet[1] = ((unsigned)flag->uarg & WC1) | MB1;
 	}
-	if (size < 18)
+	else if (size < 18)
 	{
 		octet[0] = (((unsigned)flag->uarg >> 12) & WC3) | MB3;
 		octet[1] = (((unsigned)flag->uarg >> 6) & WC1) | MB1;
@@ -98,20 +114,28 @@ void		convert_unicode(t_flag *flag, char size)
 		octet[2] = (((unsigned)flag->uarg >> 6) & WC1) | MB1;
 		octet[3] = ((unsigned)flag->uarg & WC1) | MB1;
 	}
-
-/*	unsigned int oct;
+	print_binaire(flag->uarg);
+	print_binaire(octet[0]);
+	print_binaire(octet[1]);
+	print_binaire(octet[2]);
+	print_binaire(octet[3]);
+	//s = (char *)octet;
+	//write(1, s, 4);
+	//return (s);
+	unsigned int oct;
 	oct = 0;
 	oct = 0xF0808080 | (((unsigned)flag->uarg << 6) & 0x7000000)
 					| (((unsigned)flag->uarg << 4) & 0x3F0000)
 					| (((unsigned)flag->uarg << 2) & 0x3F00)
 					| ((unsigned)flag->uarg & 0x3F);
-*/	
-	char *s;
-	
-	s = octet;
+	print_binaire(oct);
+	flag->uarg = oct;
+	print_binaire(flag->uarg);
+	s = ft_itoa(oct);
+	write(1, &oct, 4);
+	return (s);
+	//return (octet);
 	//write(1, octet, 4);
-	write(1, s, 4);
+	//write(1, s, 4);
 
-
-printf("\n\n");
 }

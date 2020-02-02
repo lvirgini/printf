@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 16:09:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/02 17:12:49 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 20:13:06 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_dispatch_type(const char *format, int i,
 	}
 	flag->specifiers = format[i];
 	if (format[i] == 'c')
-		print_character(args, flag);
+		print_character(flag);
 	else if (format[i] == 's')
 		print_string(args, flag);
 	else if (format[i] == 'p')
@@ -72,10 +72,12 @@ int		ft_type_classic(const char *format, int i,
 {
 	if ((ft_strchr("di", format[i])))
 		flag->arg = (int)va_arg(args, int);
-	else if ((ft_strchr("uxX", format[i])))
+	else if ((ft_strchr("cuxX", format[i])))
 		flag->uarg = (unsigned int)va_arg(args, unsigned int);
 	else if ((format[i] == 'p'))
 		flag->uarg = (ULL)va_arg(args, ULL);
+	//else if (format[i] == 'c')
+	//	flag->uarg = (int)va_arg(args, int);
 	else if (ft_strchr("cs", format[i]))
 		;
 	else
@@ -111,7 +113,7 @@ int		ft_type_long(const char *format, int i,
 	//	else if (format[i + 1] == 's')
 	//		str_unicode(flag);
 		else if (format[i + 1] == 'c')
-			c_unicode(args, flag);
+			flag->uarg = (int)va_arg(args, int);
 		else
 			flag->arg_error = 1;
 		return (i + 1);
