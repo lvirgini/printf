@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:47:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 17:12:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 17:12:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static int		ft_clean_end(t_flag *flag)
 
 int				ft_printf(const char *restrict format, ...)
 {
-	unsigned int	i;
 	unsigned int	len;
 	va_list			args;
 	t_flag			*flag;
@@ -71,17 +70,19 @@ int				ft_printf(const char *restrict format, ...)
 		return (-1);
 	while (format)
 	{
+		
 		len = ft_strchr_i(format, '%');
 		ft_putstr_fd_maxlen((char *)format, 1, len);
 		flag->total_print += len;
 		if (format[len] == '\0')
 			return (ft_clean_end(flag));
-		else if (format[len] == '%')
+		if (format[len] == '%')
 		{
-			i = ft_what_options(format, &len, args, flag);
+			len++;
+			len += ft_what_options(format + len, args, flag);
 			ft_struct_reset(flag);
 		}
-		format += i;
+		format += len;
 	}
 	va_end(args);
 	return (ft_clean_end(flag));

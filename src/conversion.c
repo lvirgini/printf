@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:11:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 17:09:18 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 12:05:05 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*convert_adress(t_flag *flag)
 		++len;
 	if (len == 0 || !(result = malloc(sizeof(result) * (++len + 3))))
 		return (NULL);
-	return (NULL);
 	len += 2;
 	result[len] = '\0';
 	while (flag->uarg)

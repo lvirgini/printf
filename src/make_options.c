@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 21:23:35 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 17:42:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 16:51:21 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ char	*print_before_0x(int max, char c, char *s, int *len)
 {
 	char *tmp;
 
-	max -= *len + 2;
-	if (!(tmp = malloc(sizeof(*tmp) * (max + *len + 1))))
+	max -= *len;
+	*len += 2;
+	if ((tmp = malloc(sizeof(*tmp) * (max + *len + 1))))
 	{
 		tmp[0] = s[0];
 		tmp[1] = s[1];
@@ -32,6 +33,7 @@ char	*print_before_0x(int max, char c, char *s, int *len)
 		tmp[*len] = '\0';
 	}
 	free(s);
+	*len -= 2;
 	return (tmp);
 }
 
@@ -44,9 +46,9 @@ char	*print_before_sign(int max, char c, char *s, int *len)
 {
 	char *tmp;
 
+	max -= *len;
 	*len += 1;
-	max -= *len + 1;
-	if (!(tmp = malloc(sizeof(*tmp) * (max + *len + 1))))
+	if ((tmp = malloc(sizeof(*tmp) * (max + *len + 1))))
 	{
 		tmp[0] = s[0];
 		ft_memset(tmp + 1, c, max);

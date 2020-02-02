@@ -6,13 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 16:42:17 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 14:51:00 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // ATTENTION retirer stdio.h + verif des retrait de tous printf
 // verifier uint max pour utoa et retirer ses commentaires,
-// regler le probleme pour les mauvais flags : retourner la chaine %xdlala
 // tester si 4 arg OK mais 5eme mauvais :
 // verififier les valeurs de retour de malloc si non fonctionnel
 
@@ -42,7 +41,7 @@
 #include <unistd.h>
 #include <stddef.h>
 #include "libft.h"
-#include <stdio.h>
+#include <stdio.h> //
 
 typedef struct s_flag	t_flag;
 
@@ -60,31 +59,39 @@ struct		s_flag
 };
 
 /*
-** Les fonctions principales.
+** Les fonctions qui récupère l'argument selon son type
 */
 
 # define PRINTF_ATTR __attribute__ ((format (printf, 1, 2)))
 int			ft_printf(const char * restrict format, ...);// PRINTF_ATTR;
-int			ft_dispatch_type(const char *format, unsigned int *i,
+int			ft_dispatch_type(const char *format, int i,
 					va_list args, t_flag *flag);
-void		ft_size_type(const char *format, unsigned int *i,
+int			ft_size_type(const char *format, int i,
 					va_list args, t_flag *flag);
-int			ft_what_options(const char *format, unsigned int *i,
+int			ft_type_long(const char *format, int i,
 					va_list args, t_flag *flag);
-void		ft_type_long(const char *format, unsigned int *i,
+int			ft_type_short(const char *format, int i,
 					va_list args, t_flag *flag);
-void		ft_type_short(const char *format, unsigned int *i,
-					va_list args, t_flag *flag);
-void		ft_type_classic(const char *format, unsigned int *i,
+int			ft_type_classic(const char *format, int i,
 					va_list args, t_flag *flag);
 
 /*
-**	Les fonctions de conversion du type d'argument.
+** Les fonctions qui récupèrent les flags
+*/
+
+int			ft_what_options(const char *format,	va_list args, t_flag *flag);
+int			ft_precision_is_digit(const char *s, t_flag *flag);
+int			ft_precision(const char *s, int i, va_list args, t_flag *flag);
+int			ft_width_digit(const char *format, t_flag *flag);
+
+/*
+**	Les fonctions de conversion.
 */
 
 void		convert_unicode(t_flag *, char);
 char		*convert_hexadecimal(t_flag *flag);
 char		*convert_adress(t_flag *flag);
+void		c_unicode(va_list args, t_flag *flag);
 
 /*
 ** Les fonctions d'impression.
@@ -98,7 +105,6 @@ void		print_hexa(t_flag *flag, char *s);
 void		print_int(t_flag *flag, char *s);
 void		print_character(va_list args, t_flag *flag);
 void		print_string(va_list args, t_flag *flag);
-void		c_unicode(va_list args, t_flag *flag);
 
 /*
 ** Les fonctions utiles modifiées pour printf.

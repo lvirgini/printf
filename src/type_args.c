@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 16:09:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 17:47:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/02 17:12:49 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,107 +16,105 @@
 ** recherche du type d'argument, et l'envoie pour son impression.
 */
 
-int		ft_dispatch_type(const char *format, unsigned int *i,
+int		ft_dispatch_type(const char *format, int i,
 						va_list args, t_flag *flag)
 {
-	ft_size_type(format, i, args, flag);
-	if (flag->arg_error)
+	i = ft_size_type(format, i, args, flag);
+	if (flag->arg_error && (flag->total_print += 1))
 	{
 		write(1, "%%", 1);
-		return (*i);
+		return (1);
 	}
-	flag->specifiers = format[*i];
-	if (format[*i] == 'c')
+	flag->specifiers = format[i];
+	if (format[i] == 'c')
 		print_character(args, flag);
-	else if (format[*i] == 's')
+	else if (format[i] == 's')
 		print_string(args, flag);
-	else if (format[*i] == 'p')
+	else if (format[i] == 'p')
 		print_hexa(flag, (convert_adress(flag)));
-	else if ((format[*i] == 'd' || format[*i] == 'i'))
+	else if ((format[i] == 'd' || format[i] == 'i'))
 		print_int(flag, ft_lltoa(flag->arg));
-	else if (format[*i] == 'u')
+	else if (format[i] == 'u')
 		print_int(flag, ft_ulltoa(flag->uarg));
-	else if (format[*i] == 'x' || format[*i] == 'X')
+	else if (format[i] == 'x' || format[i] == 'X')
 		print_hexa(flag, (convert_hexadecimal(flag)));
-	return (*i + 1);
+	return (i + 1);
 }
 
 /*
 ** Recherche de la taille de l'argument à récupérer.
 */
 
-void	ft_size_type(const char *format, unsigned int *i,
-					va_list args, t_flag *flag)
+int 	ft_size_type(const char *format, int i, va_list args, t_flag *flag)
 {
-	void	(*f)(const char *, unsigned int *, va_list, t_flag *);
+	int		(*f)(const char *, int, va_list, t_flag *);
 	int		j;
 
 	j = 0;
-	f = NULL;
-	while (ft_strchr("hl", format[*i + j]))
+	f = &ft_type_classic;
+	while (ft_strchr("hl", format[i + j]))
 	{
-		if (format[*i] == 'h')
+		if (format[i] == 'h')
 			f = &ft_type_short;
 		else
 			f = &ft_type_long;
 		++j;
 	}
-	if (!f)
-		f = &ft_type_classic;
-	f(format, i, args, flag);
+	return (f(format, i, args, flag));
 }
 
 /*
 ** Récupère l'argument sans specification de taille.
 */
 
-void	ft_type_classic(const char *format, unsigned int *i,
+int		ft_type_classic(const char *format, int i,
 					va_list args, t_flag *flag)
 {
-	if ((ft_strchr("di", format[*i])))
+	if ((ft_strchr("di", format[i])))
 		flag->arg = (int)va_arg(args, int);
-	else if ((ft_strchr("uxX", format[*i])))
+	else if ((ft_strchr("uxX", format[i])))
 		flag->uarg = (unsigned int)va_arg(args, unsigned int);
-	else if ((format[*i] == 'p'))
+	else if ((format[i] == 'p'))
 		flag->uarg = (ULL)va_arg(args, ULL);
-	else if (ft_strchr("cs", format[*i]))
-		return ;
+	else if (ft_strchr("cs", format[i]))
+		;
 	else
 		flag->arg_error = 1;
+	return (i);
 }
 
 /*
 ** Récupère l'argument avec les flags (l) ou (ll).
 */
 
-void	ft_type_long(const char *format, unsigned int *i,
+int		ft_type_long(const char *format, int i,
 					va_list args, t_flag *flag)
 {
-	while (format[*i] != 'l')
+	while (format[i] != 'l')
 		i++;
-	if (format[*i + 1] == 'l')
+	if (format[i + 1] == 'l')
 	{
-		if ((ft_strchr("di", format[*i + 2])))
+		if ((ft_strchr("di", format[i + 2])))
 			flag->arg = (long long)va_arg(args, long long);
-		else if ((ft_strchr("uxX", format[*i + 2])))
+		else if ((ft_strchr("uxX", format[i + 2])))
 			flag->uarg = (ULL)va_arg(args, ULL);
 		else
 			flag->arg_error = 1;
-		*i += 2;
+		return (i + 2);
 	}
 	else
 	{
-		if ((ft_strchr("di", format[*i + 1])))
+		if ((ft_strchr("di", format[i + 1])))
 			flag->arg = (long)va_arg(args, long);
-		else if ((ft_strchr("uxX", format[*i + 1])))
+		else if ((ft_strchr("uxX", format[i + 1])))
 			flag->uarg = (unsigned long int)va_arg(args, unsigned long int);
-	//	else if (format[*i + 1] == 's')
+	//	else if (format[i + 1] == 's')
 	//		str_unicode(flag);
-		else if (format[*i + 1] == 'c')
+		else if (format[i + 1] == 'c')
 			c_unicode(args, flag);
 		else
 			flag->arg_error = 1;
-		*i += 1;
+		return (i + 1);
 	}
 }
 
@@ -124,29 +122,29 @@ void	ft_type_long(const char *format, unsigned int *i,
 ** Récupère l'argument avec les flags (h) ou (hh).
 */
 
-void	ft_type_short(const char *format, unsigned int *i,
+int		ft_type_short(const char *format, int i,
 					va_list args, t_flag *flag)
 {
-	while (format[*i] != 'h')
+	while (format[i] != 'h')
 		i++;
-	if (format[*i + 1] == 'h')
+	if (format[i + 1] == 'h')
 	{
-		if ((ft_strchr("di", format[*i + 2])))
+		if ((ft_strchr("di", format[i + 2])))
 			flag->arg = (char)va_arg(args, int);
-		else if ((ft_strchr("uxX", format[*i + 2])))
+		else if ((ft_strchr("uxX", format[i + 2])))
 			flag->uarg = (unsigned char)va_arg(args, int);
 		else
 			flag->arg_error = 1;
-		*i += 2;
+		return (i + 2);
 	}
 	else
 	{
-		if ((ft_strchr("di", format[*i + 1])))
+		if ((ft_strchr("di", format[i + 1])))
 			flag->arg = (short int)va_arg(args, int);
-		else if ((ft_strchr("uxX", format[*i + 1])))
+		else if ((ft_strchr("uxX", format[i + 1])))
 			flag->uarg = (unsigned short int)va_arg(args, int);
 		else
 			flag->arg_error = 1;
-		*i += 1;
+		return (i + 1);
 	}
 }
