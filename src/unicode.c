@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:35:47 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/02 22:25:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/03 12:30:01 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ char		*char_or_unicode(t_flag *flag)
 char		*convert_unicode(t_flag *flag, char size)
 {
 
-	unsigned char	octet[4];
+	//unsigned char	octet[4];
 	char			*s;
 	
-	ft_bzero(octet, 4);
+	/*ft_bzero(octet, 4);
 	if (size < 8)
 		octet[0] = (unsigned char)flag->uarg;
 	else if (size < 12)
@@ -118,24 +118,58 @@ char		*convert_unicode(t_flag *flag, char size)
 	print_binaire(octet[0]);
 	print_binaire(octet[1]);
 	print_binaire(octet[2]);
-	print_binaire(octet[3]);
+	print_binaire(octet[3]);*/
 	//s = (char *)octet;
 	//write(1, s, 4);
 	//return (s);
+
+	/*
+
+		(1111 0)000 (10)10 0010 (10)00 0001 (10)00 0101
+			<< 6			<<4			<< 2
+
+		1111 0000
+		0000 0111
+
+		1000 0000	0000 0000	0000 0000	mask 3 	= 800000 | (arg >> 12) & mask 3b
+		0011 1111	0000 0000	0000 0000  	mask 3b = 3f0000
+
+					1000 0000 	0000 0000	mask 2  = 8000 | (arg >> 6) & 3f00)
+					0011 1111	0000 0000	mask 2b = 3f00
+
+								10xx xxxx	mask 1 = 80 | (arg & 3f)		
+								0011 1111	mask 1b = 3f
+
+	*/
+
+
 	unsigned int oct;
 	oct = 0;
-	oct = 0xF0808080 | (((unsigned)flag->uarg << 6) & 0x7000000)
+
+	oct = ((0xf0000000 | (((unsigned)flag->uarg << 6) & 0x7000000)) |
+		(0x800000 | (((unsigned)flag->uarg << 4) & 0x3f0000)) |
+		(0x8000 | (((unsigned)flag->uarg << 2) & 0x3f00)) |
+		(0x80 | ((unsigned)flag->uarg & 0x3f)));
+/*	oct = 0xF0808080 | (((unsigned)flag->uarg << 6) & 0x7000000)
 					| (((unsigned)flag->uarg << 4) & 0x3F0000)
 					| (((unsigned)flag->uarg << 2) & 0x3F00)
 					| ((unsigned)flag->uarg & 0x3F);
-	print_binaire(oct);
-	flag->uarg = oct;
-	print_binaire(flag->uarg);
-	s = ft_itoa(oct);
-	write(1, &oct, 4);
-	return (s);
+*/	
+	/*print_binaire(flag->uarg << 2);
+	print_binaire(0x3f00);
+	print_binaire((flag->uarg << 2 ) & 0x3f00);
+	print_binaire(0x8000);
+	*/print_binaire(oct);
+	//flag->uarg = oct;
+	//print_binaire(flag->uarg);
+	
+	//s = ft_itoa(oct);
+	//write(1, &oct, 4);
+	//return (s);
 	//return (octet);
 	//write(1, octet, 4);
-	//write(1, s, 4);
+//	printf("%lc\n", oct);
+	//write(1, s, ft_strlen(s));
+	return (NULL);
 
 }

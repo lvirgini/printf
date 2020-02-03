@@ -6,17 +6,18 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2020/01/29 15:39:00 by lvirgini         ###   ########.fr        #
+#    Updated: 2020/02/03 11:40:23 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-CFLAGS =	-Wall -Wextra -I. -I../1-libft
+CFLAGS =	-Wall -Wextra -I. -I../libft/libft.h
 
-NAME =		ft_printf
+NAME =		a.out
 
 CC =		gcc
-LIB =
+
+LIB =		../libft/libft.a
 
 SRC =		ft_printf.c 		\
 			type_args.c 		\
@@ -37,7 +38,8 @@ OBJ =		${SRC:%.c=%.o}
 %.o: %.c
 			$(CC) $(CFLAGS) -o $@ -c $<
 
-$(NAME):	${CC} ${CFLAGS} ${SRC} ${TESTALL} libft.a
+$(NAME):	$(OBJ)
+			${CC} ${CFLAGS} ${SRC} ${TESTALL} $(LIB)
 
 all:		${NAME}
 

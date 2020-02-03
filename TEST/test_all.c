@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:50:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/02 21:33:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/03 12:29:33 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 #include <limits.h>
 #include <locale.h>
 #include <stdio.h>
-#include "../src/libft.h"
-#include "ft_printf.h"
-
+#include "../libft/libft.h"
+#include "../src/ft_printf.h"
 
 
 /*
@@ -1491,7 +1490,7 @@ printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
 	setlocale(LC_ALL,"");
 
 	// CHAR 0 | 'c' | 0 a 256 au dessus |
-	/*char c;
+	char c;
 
 	c = 0;
 	c = 'c';
@@ -2314,8 +2313,8 @@ ft_printf("%\\c\n", 98);
 	printf(" |%4lc\n", wc);
 	ft_printf("f|%lc\n", wc);
 
-		printf(" |%c\n", 98);
-	ft_printf("f|%c\n", 98);
+//		printf(" |%c\n", 98);
+//	ft_printf("f|%c\n", 98);
 
 return (0);
 
