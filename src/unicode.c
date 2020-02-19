@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:35:47 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/03 12:30:01 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:33:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,23 @@ void print_binaire(unsigned wc)
 **  Récupère la taille du wchar pour envoi en conversion
 */
 
-char		*char_or_unicode(t_flag *flag)
+int		char_or_unicode(t_flag *flag)
 {
 	char 			size;
-	//unsigned char	octet[4];
-//	char			*s;
+	int				nb_oct;
 
 	size = 0;
 	while ((unsigned)flag->uarg >> size)
 		size++;
-	
-	return (convert_unicode(flag, size));
+	if (size < 8)
+		nb_oct = 1;
+	else if (size < 12)
+		nb_oct = 2;
+	else if (size < 18)
+		nb_oct = 3;
+	else
+		nb_oct = 4;
+	return (nb_oct);
 }
 
 /*
@@ -87,21 +93,19 @@ char		*char_or_unicode(t_flag *flag)
 ** 
 */
 
-char		*convert_unicode(t_flag *flag, char size)
+int		convert_unicode(t_flag *flag, int nb_oct)
 {
-
-	//unsigned char	octet[4];
-	char			*s;
+	unsigned char	octet[nb_oct];
 	
-	/*ft_bzero(octet, 4);
-	if (size < 8)
+	ft_bzero(octet, nb_oct);
+	if (nb_oct == 1)
 		octet[0] = (unsigned char)flag->uarg;
-	else if (size < 12)
+	else if (nb_oct == 2)
 	{
 		octet[0] = (((unsigned)flag->uarg >> 6) & WC2) | MB2;
 		octet[1] = ((unsigned)flag->uarg & WC1) | MB1;
 	}
-	else if (size < 18)
+	else if (nb_oct == 3)
 	{
 		octet[0] = (((unsigned)flag->uarg >> 12) & WC3) | MB3;
 		octet[1] = (((unsigned)flag->uarg >> 6) & WC1) | MB1;
@@ -114,11 +118,13 @@ char		*convert_unicode(t_flag *flag, char size)
 		octet[2] = (((unsigned)flag->uarg >> 6) & WC1) | MB1;
 		octet[3] = ((unsigned)flag->uarg & WC1) | MB1;
 	}
-	print_binaire(flag->uarg);
+/*	print_binaire(flag->uarg);
 	print_binaire(octet[0]);
 	print_binaire(octet[1]);
 	print_binaire(octet[2]);
-	print_binaire(octet[3]);*/
+	print_binaire(octet[3]);
+*/	write(1, octet, nb_oct);
+	return (nb_oct);
 	//s = (char *)octet;
 	//write(1, s, 4);
 	//return (s);
@@ -143,23 +149,29 @@ char		*convert_unicode(t_flag *flag, char size)
 	*/
 
 
-	unsigned int oct;
+/*	wchar_t oct;
+	printf("sizeof wchart = %ld\n", sizeof(wchar_t));
 	oct = 0;
 
 	oct = ((0xf0000000 | (((unsigned)flag->uarg << 6) & 0x7000000)) |
 		(0x800000 | (((unsigned)flag->uarg << 4) & 0x3f0000)) |
 		(0x8000 | (((unsigned)flag->uarg << 2) & 0x3f00)) |
 		(0x80 | ((unsigned)flag->uarg & 0x3f)));
-/*	oct = 0xF0808080 | (((unsigned)flag->uarg << 6) & 0x7000000)
+	oct = 0xF0808080 | (((unsigned)flag->uarg << 6) & 0x7000000)
 					| (((unsigned)flag->uarg << 4) & 0x3F0000)
 					| (((unsigned)flag->uarg << 2) & 0x3F00)
 					| ((unsigned)flag->uarg & 0x3F);
 */	
-	/*print_binaire(flag->uarg << 2);
+/*	print_binaire(flag->uarg << 2);
 	print_binaire(0x3f00);
 	print_binaire((flag->uarg << 2 ) & 0x3f00);
 	print_binaire(0x8000);
-	*/print_binaire(oct);
+	print_binaire(oct);
+	printf("sizeof wchart = %ld\n", sizeof(wchar_t));
+
+	s = (char)&oct;
+*///	write(1, oct, 4);
+//	write (1, s, 4);
 	//flag->uarg = oct;
 	//print_binaire(flag->uarg);
 	
@@ -170,6 +182,4 @@ char		*convert_unicode(t_flag *flag, char size)
 	//write(1, octet, 4);
 //	printf("%lc\n", oct);
 	//write(1, s, ft_strlen(s));
-	return (NULL);
-
 }

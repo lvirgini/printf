@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:28:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/02 20:44:25 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:44:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,29 @@
 
 void	print_character(t_flag *flag)
 {
-	int				len;
-	char			*s;
-	char			*(*f)(int, char, char *, int *);
+	int				nb_oct;
+	char			s[flag->width];
 
-	s = (char_or_unicode(flag));
-	len = ft_strlen(s);
+	nb_oct = char_or_unicode(flag);
+	if (flag->width > nb_oct)
+	{
+		flag->width -= nb_oct;
+		ft_memset((char *)s, ' ', flag->width);
+		flag->total_print += flag->width + 1;
+	}
 	if (flag->left == 1)
-		f = &print_after;
+	{
+		convert_unicode(flag, nb_oct);
+		if (flag->width > nb_oct)
+			ft_putstr_fd_maxlen(s, 1, flag->width);
+	}
 	else
-		f = &print_before;
-	if (flag->width > 1)
-		s = f(flag->width, ' ', s, &len);
-	ft_putstr_fd_maxlen(s, 1, len);
-	flag->total_print += len;
-	free(s);
+	{
+		if (flag->width > nb_oct)
+			ft_putstr_fd_maxlen(s, 1, flag->width);
+		convert_unicode(flag, nb_oct);
+	}
+	flag->total_print += flag->width + 1;
 }
 
 /*
