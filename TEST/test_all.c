@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:50:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/03 12:29:33 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/22 18:45:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include "../libft/libft.h"
 #include "../src/ft_printf.h"
+ #include <wchar.h>
 
 
 /*
@@ -33,7 +34,9 @@ void	print_error(int origin, int progra)
 }
 
 int main()
-{
+{	int a = 0;
+	int b = 0;	
+	setlocale(LC_ALL,"");
 /*printf("\n\n\n\t\t\t..-*  INT  *-..\n");
 	printf("\t\t*°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°*\n");
 
@@ -1487,14 +1490,15 @@ printf("\n\n\n\t\t\t..-* CHAR C *-..\n");
 	ft_printf("f|%-*c|\n\n", 30, c);
 
 printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
-	setlocale(LC_ALL,"");
+
 
 	// CHAR 0 | 'c' | 0 a 256 au dessus |
-	char c;
+	//char c;
 
-	c = 0;
-	c = 'c';
+	//c = 0;
+	//c = 'c';
 	wchar_t wc = L'𢁅';
+
 
 
 	//	printf("|%.0lc|\n", c);
@@ -1503,56 +1507,739 @@ printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
 	printf("\n\n*------------------------------------------------------*\n");
 	printf("*** **  *** 	CAS		[ %%xd ]	avec x positif:  // 1\n\n");
 
-	printf( " |%1c|\n", wc);
-	ft_printf( "f|%1c|\n\n", wc);
+	a = printf( "%lc", wc);
+	b = ft_printf( "%lc\n", wc);
+	print_error(a, b);
 
-	printf( " |%3lc|\n", wc);
-	ft_printf( "f|%3lc|\n\n", wc);
+	a = printf( " ||\n");
+	b = ft_printf( "f||\n\n");
+	print_error(a, b);
 
-	printf( " |%30lc|\n", wc);
-	ft_printf( "f|%30lc|\n\n", wc);
+	a = printf( " |%1lc|\n", wc);
+	b = ft_printf( "f|%1lc|\n\n", wc);
+	print_error(a, b);
+
+	a = printf( " |%3lc|\n", wc);
+	b = ft_printf( "f|%3lc|\n\n", wc);
+	print_error(a, b);
+
+	a = printf( " |%30lc|\n", wc);
+	b = ft_printf( "f|%30lc|\n\n", wc);
+	print_error(a, b);
 
 	printf("\n\n*------------------------------------------------------*\n");
 	printf("*** **  *** 	CAS		[ %%*d ]	avec * positif: // 2\n\n");
 
-	printf( " |%*lc|\n",1, wc);
-	ft_printf( "f|%*lc|\n\n", 1, wc);
+	a = printf( " |%*lc|\n",1, wc);
+	b = ft_printf( "f|%*lc|\n\n", 1, wc);
+	print_error(a, b);
 
-	printf( " |%*lc|\n", 3, wc);
-	ft_printf( "f|%*lc|\n\n", 3, wc);
+	a = printf( " |%*lc|\n", 3, wc);
+	b = ft_printf( "f|%*lc|\n\n", 3, wc);
+	print_error(a, b);
 
-	printf( " |%*lc|\n", 30, wc);
-	ft_printf( "f|%*lc|\n\n", 30, wc);
+	a = printf( " |%*lc|\n", 30, wc);
+	b = ft_printf( "f|%*lc|\n\n", 30, wc);
+	print_error(a, b);
 
 	printf("*------------------------------------------------------*\n");
 	printf("*** **  *** 	CAS		[ %%xd ]	avec x negatif : // 3\n\n");
 
-	printf(" |%-1lc|\n", wc);
-	ft_printf("f|%-1lc|\n\n", wc);
+	a = printf(" |%-1lc|\n", wc);
+	b = ft_printf("f|%-1lc|\n\n", wc);
+	print_error(a, b);
 
-	printf(" |%-30lc|\n", wc);
-	ft_printf("f|%-30lc|\n\n", wc);
+	a = printf(" |%-30lc|\n", wc);
+	b = ft_printf("f|%-30lc|\n\n", wc);
+	print_error(a, b);
 
 	printf("*------------------------------------------------------*\n");
 	printf("*** **  *** 	CAS		[ %%*d ]	avec * negatif : / 4\n\n");
 
-	printf(" |%*lc|\n", -1, wc);
-	ft_printf("f|%*lc|\n\n", -1, wc);
+	a = printf(" |%*lc|\n", -1, wc);
+	b = ft_printf("f|%*lc|\n\n", -1, wc);
+	print_error(a, b);
 
-	printf(" |%*lc|\n", -0, wc);
-	ft_printf("f|%*lc|\n\n", -0, wc);
+	a = printf(" |%*lc|\n", -0, wc);
+	b = ft_printf("f|%*lc|\n\n", -0, wc);
+	print_error(a, b);
 
-	printf(" |%*lc|\n", -30, wc);
-	ft_printf("f|%*lc|\n\n", -30, wc);
+	a = printf(" |%*lc|\n", -30, wc);
+	b = ft_printf("f|%*lc|\n\n", -30, wc);
+	print_error(a, b);
 
-	printf(" |%-*lc|\n", -30, wc);
-	ft_printf("f|%-*lc|\n\n", -30, wc);
+	a = printf(" |%-*lc|\n", -30, wc);
+	b = ft_printf("f|%-*lc|\n\n", -30, wc);
+	print_error(a, b);
 
-	printf(" |%-*lc|\n", 30, wc);
-	ft_printf("f|%-*lc|\n\n", 30, wc);
+	a = printf(" |%-*lc|\n", 30, wc);
+	b = ft_printf("f|%-*lc|\n\n", 30, wc);
+	print_error(a, b);
+
+*/printf("\n\n\n\t\t\t..-* L STRING  unicode *-..\n");
+	printf("\t\t*°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°*\n");
+
+	wchar_t *ws;
+	// chaine standard | pointeur NULL | chaine vide | chaine 1 char |
+
+	//ws = NULL;
+	ws = L"";
+	ws = L"c";	
+	//printf("c = %lu\n",  wcslen(ws));	
+	//a = printf( "%ls\n", ws);
+	//b = ft_printf( "%ls\n\n", ws);
+	//print_error(a, b);
+
+	ws = L"语";
+	//ws = L"123456789";
+/*
+	a = printf( "%ls\n", ws);
+	b = ft_printf( "%ls\n\n", ws);
+	print_error(a, b);
+
+	a = printf( " |%2ls|\n", ws);
+	b = ft_printf( " |%2ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf( " |%3ls|\n", ws);
+	b = ft_printf( " |%3ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf( " |%4ls|\n", ws);
+	b = ft_printf( " |%4ls|\n\n", ws);
+	print_error(a, b);
+*/
 
 
-printf("\n\n\n\t\t\t..-* HEXADECIMAL *-..\n");
+
+
+	ws = L"语语";
+
+	//a = printf( " |%5ls|\n", ws);
+	//b = ft_printf( " |%5ls|\n\n", ws);
+	//print_error(a, b);
+
+	ws = L"ﷰ";
+	ws = L"ﷰΔι𢁅Διﷰκαιοπολις chaine 语言处理";
+
+
+	// a = printf(" |%-*.12ls|\n", -12, -0, ws);			Warning interessant
+	// b = ft_printf("f|%-*.12ls|\n\n",  -12, -0, ws);
+
+	printf("\n\n*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%xd ]	avec x positif:  // 1\n\n");
+
+
+	a = printf( " |%1ls|\n", ws);
+	b = ft_printf( "f|%1ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf( " |%3ls|\n", ws);
+	b = ft_printf( "f|%3ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf( " |%30ls|\n", ws);
+	b = ft_printf( "f|%30ls|\n\n", ws);
+	print_error(a, b);
+
+	printf("\n\n*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*d ]	avec * positif: // 2\n\n");
+	print_error(a, b);
+
+	a = printf( " |%*ls|\n",1, ws);
+	b = ft_printf( "f|%*ls|\n\n", 1, ws);
+	print_error(a, b);
+
+	a = printf( " |%*ls|\n", 3, ws);
+	b = ft_printf( "f|%*ls|\n\n", 3, ws);
+	print_error(a, b);
+
+	a = printf( " |%*ls|\n", 30, ws);
+	b = ft_printf( "f|%*ls|\n\n", 30, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%xd ]	avec x negatif : // 3\n\n");
+
+
+	a = printf(" |%-1ls|\n", ws);
+	b = ft_printf("f|%-1ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%-30ls|\n", ws);
+	b = ft_printf("f|%-30ls|\n\n", ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*d ]	avec * negatif : / 4\n\n");
+
+
+	a = printf(" |%*ls|\n", -1, ws);
+	b = ft_printf("f|%*ls|\n\n", -1, ws);
+	print_error(a, b);
+
+	a = printf(" |%*ls|\n", -30, ws);
+	b = ft_printf("f|%*ls|\n\n", -30, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*ls|\n", -30, ws);
+	b = ft_printf("f|%-*ls|\n\n", -30, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*ls|\n", 30, ws);
+	b = ft_printf("f|%-*ls|\n\n", 30, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%.xd ]	avec x positif : // 5\n\n");
+
+
+	a = printf(" |%.0ls|\n", ws);
+	b = ft_printf("f|%.0ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%.1ls|\n", ws);
+	b = ft_printf("f|%.1ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%.15ls|\n", ws);
+	b = ft_printf("f|%.15ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%.150ls|\n", ws);
+	b = ft_printf("f|%.150ls|\n\n", ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%.*d ]	avec * positif : // 6\n\n");
+
+	a = printf(" |%.*ls|\n", 0, ws);
+	b = ft_printf("f|%.*ls|\n\n", 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%.*ls|\n", 1, ws);
+	b = ft_printf("f|%.*ls|\n\n", 1, ws);
+	print_error(a, b);
+
+	a = printf(" |%.*ls|\n", 15, ws);
+	b = ft_printf("f|%.*ls|\n\n", 15, ws);
+	print_error(a, b);
+
+	a = printf(" |%.*ls|\n", 150, ws);
+	b = ft_printf("f|%.*ls|\n\n", 150, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%.xd ]	avec x negatif : // 7 WARNING \n\n");
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%.*d ]	avec * negatif : // 8\n\n");
+
+
+	a = printf(" |%.*ls|\n", -0, ws);
+	b = ft_printf("f|%.*ls|\n\n", -0, ws);
+	print_error(a, b);
+
+	a = printf(" |%.*ls|\n", -1, ws);
+	b = ft_printf("f|%.*ls|\n\n", -1, ws);
+	print_error(a, b);
+
+	a = printf(" |%.*ls|\n", -15, ws);
+	b = ft_printf("f|%.*ls|\n\n", -15, ws);
+	print_error(a, b);
+
+	a = printf(" |%.*ls|\n", -150, ws);
+	b = ft_printf("f|%.*ls|\n\n", -150, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%x.d ]	avec x positif : // 9\n\n");
+
+	a = printf(" |%1.ls|\n", ws);
+	b = ft_printf("f|%1.ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%15.ls|\n", ws);
+	b = ft_printf("f|%15.ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%150.ls|\n", ws);
+	b = ft_printf("f|%150.ls|\n\n", ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.d ]	avec * positif :	// 10\n\n");
+
+	a = printf(" |%*.ls|\n", 0, ws);
+	b = ft_printf("f|%*.ls|\n\n", 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.ls|\n", 1, ws);
+	b = ft_printf("f|%*.ls|\n\n", 1, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.ls|\n", 150, ws);
+	b = ft_printf("f|%*.ls|\n\n", 150, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%x.d ]	avec x negatif :	// 11\n\n");
+
+	a = printf(" |%-1.ls|\n", ws);
+	b = ft_printf("f|%-1.ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%-150.ls|\n", ws);
+	b = ft_printf("f|%-150.ls|\n\n", ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.d ]	avec * negatif : 	// 12\n\n");
+
+	a = printf(" |%*.ls|\n", -0, ws);
+	b = ft_printf("f|%*.ls|\n\n", -0, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.ls|\n", -1, ws);
+	b = ft_printf("f|%*.ls|\n\n", -1, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.ls|\n", -150, ws);
+	b = ft_printf("f|%*.ls|\n\n", -150, ws);
+	print_error(a, b);
+
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%x.yd ]	avec x et y positif : 	// 13\n\n");
+
+	a = printf(" |%5.12ls|\n", ws);
+	b = ft_printf("f|%5.12ls|\n\n", ws);
+	print_error(a, b);
+
+
+	a = printf(" |%12ls|\n", ws);
+	b = ft_printf("f|%12ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%.5ls|\n", ws);
+	b = ft_printf("f|%.5ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%12.5ls|\n", ws);
+	b = ft_printf("f|%12.5ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%4.4ls|\n", ws);
+	b = ft_printf("f|%4.4ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%4.5ls|\n", ws);
+	b = ft_printf("f|%4.5ls|\n\n", ws);
+	print_error(a, b);
+	
+	a = printf(" |%5.4ls|\n", ws);
+	b = ft_printf("f|%5.4ls|\n\n", ws);
+	print_error(a, b);
+
+
+
+
+	a = printf(" |%12.0ls|\n", ws);
+	b = ft_printf("f|%12.0ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%12.12ls|\n", ws);
+	b = ft_printf("f|%12.12ls|\n\n", ws);
+	print_error(a, b);
+
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.*d ]	avec x et * positif : 	// 14\n\n");
+
+	a = printf(" |%35.*ls|\n", 12, ws);
+	b = ft_printf("f|%35.*ls|\n\n", 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%12.*ls|\n", 5, ws);
+	b = ft_printf("f|%12.*ls|\n\n", 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%12.*ls|\n", 0, ws);
+	b = ft_printf("f|%12.*ls|\n\n", 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%12.*ls|\n", 12, ws);
+	b = ft_printf("f|%12.*ls|\n\n", 12, ws);
+	print_error(a, b);
+
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.*d ]	avec *1 et *2 positif :  	// 15\n\n");
+
+	a = printf(" |%*.*ls|\n", 5, 12, ws);
+	b = ft_printf("f|%*.*ls|\n\n",5, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 12, 5, ws);
+	b = ft_printf("f|%*.*ls|\n\n",12, 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 12, 0, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 12, 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 0, 12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 0, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 12, 12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 12, 12, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.*d ]	avec *1 et y positif : 	// 16\n\n");
+
+	a = printf(" |%*.12ls|\n", 5, ws);
+	b = ft_printf("f|%*.12ls|\n\n",5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.5ls|\n", 12, ws);
+	b = ft_printf("f|%*.5ls|\n\n",12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.0ls|\n", 12, ws);
+	b = ft_printf("f|%*.0ls|\n\n", 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.12ls|\n", 0, ws);
+	b = ft_printf("f|%*.12ls|\n\n", 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.12ls|\n", 12, ws);
+	b = ft_printf("f|%*.12ls|\n\n", 12, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%x.yd ]	avec x negatif et y positif : 	// 17\n\n");
+
+	a = printf(" |%-5.12ls|\n", ws);
+	b = ft_printf("f|%-5.12ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.5ls|\n", ws);
+	b = ft_printf("f|%-12.5ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.0ls|\n", ws);
+	b = ft_printf("f|%-12.0ls|\n\n", ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.12ls|\n", ws);
+	b = ft_printf("f|%-12.12ls|\n\n", ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.yd ]	avec * negatif et y positif : 	// 18\n\n");
+
+	a = printf(" |%*.12ls|\n", -5, ws);
+	b = ft_printf("f|%*.12ls|\n\n", -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.12ls|\n", -5, ws);
+	b = ft_printf("f|%-*.12ls|\n\n", -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.12ls|\n", 5, ws);
+	b = ft_printf("f|%-*.12ls|\n\n", 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.12ls|\n", 5, ws);
+	b = ft_printf("f|%*.12ls|\n\n", 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.5ls|\n", -12, ws);
+	b = ft_printf("f|%*.5ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.5ls|\n", -12, ws);
+	b = ft_printf("f|%-*.5ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.5ls|\n", 12, ws);
+	b = ft_printf("f|%-*.5ls|\n\n", 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.0ls|\n", -12, ws);
+	b = ft_printf("f|%*.0ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.0ls|\n", 12, ws);
+	b = ft_printf("f|%-*.0ls|\n\n", 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.0ls|\n", -12, ws);
+	b = ft_printf("f|%-*.0ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.12ls|\n", -0, ws);
+	b = ft_printf("f|%*.12ls|\n\n",-0, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.12ls|\n", -0, ws);
+	b = ft_printf("f|%-*.12ls|\n\n",-0, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.12ls|\n", -12, ws);
+	b = ft_printf("f|%-*.12ls|\n\n",-12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.12ls|\n", -12, ws);
+	b = ft_printf("f|%*.12ls|\n\n",-12, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.yd ]	avec * positif et y negatif : WARNING ok	// 19\n\n");
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%x.*d ]	avec x positif et * negatif :	// 20 \n\n");
+
+	a = printf(" |%5.*ls|\n", -12, ws);
+	b = ft_printf("f|%5.*ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.*ls|\n", 5, ws);
+	b = ft_printf("f|%-12.*ls|\n\n", 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%12.*ls|\n", -5, ws);
+	b = ft_printf("f|%12.*ls|\n\n", -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-5.*ls|\n", -12, ws);
+	b = ft_printf("f|%-5.*ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%12.*ls|\n", -12, ws);
+	b = ft_printf("f|%12.*ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%12.*ls|\n", -0, ws);
+	b = ft_printf("f|%12.*ls|\n\n", -0, ws);
+
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 12, 5, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 12, 5, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.*d ]	avec * positif et * negatif : 	// 21\n\n");
+
+	a = printf(" |%*.*ls|\n", 5, -12, ws);
+	b = ft_printf("f|%*.*ls|\n\n",5,  -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 12, -12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 12, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n",12,  -5, ws);
+	b = ft_printf("f|%*.*ls|\n\n",12,  -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 12, -0, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 12, -0, ws);
+	print_error(a, b);
+
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.*d ]	avec * negatif et * positif :  	// 23\n\n");
+
+	a = printf(" |%*.*ls|\n", -5, 12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -5, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -5, 12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", -5, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", 5, 12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", 5, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 5, 12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 5, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -30, 5, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -30, 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -30, 5, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", -30, 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", 30, 5, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", 30, 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -30, 0, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -30, 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", 30, 0, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", 30, 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -30, 0, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", -30, 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -0, 12, ws);
+	b = ft_printf("f|%*.*ls|\n\n",-0, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -0, 12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n",-0, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -12, 12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n",-12, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -12, 12, ws);
+	b = ft_printf("f|%*.*ls|\n\n",-12, 12, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%x.*d ]	avec x negatif et * positif : 	// 24\n\n");
+
+	a = printf(" |%-5.*ls|\n", 12, ws);
+	b = ft_printf("f|%-5.*ls|\n\n", 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-30.*ls|\n", 5, ws);
+	b = ft_printf("f|%-30.*ls|\n\n", 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.*ls|\n", 0, ws);
+	b = ft_printf("f|%-12.*ls|\n\n", 0, ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.*ls|\n", 12, ws);
+	b = ft_printf("f|%-12.*ls|\n\n", 12, ws);
+	print_error(a, b);
+
+		a = printf(" |%-12.*ls|\n", 30, ws);
+	b = ft_printf("f|%-12.*ls|\n\n", 30, ws);
+	print_error(a, b);
+
+	printf("*-------------------------------A FAIRE -----------------------*\n");
+	printf("*** **  *** 	CAS		[ %%*.d ]	avec * negatif et * negatif : 	// 25\n\n");
+
+
+	a = printf(" |%*.*ls|\n", -5, -12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -5, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -5, -12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", -5, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", 5, -12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", 5, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 5, -12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 5, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -5, 12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -5, 12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -12, 5, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -12, 5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", 12, -5, ws);
+	b = ft_printf("f|%*.*ls|\n\n", 12, -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -12, -5, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -12, -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -12, -5, ws);
+	b = ft_printf("f|%-*.*ls|\n\n",  -12, -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", 12, -5, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", 12, -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -12, -12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -12, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -12, -12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n",  -12, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", 12, -12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", 12, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -12, -0, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -12, -0, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", 12, -0, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", 12, -0, ws);
+	print_error(a, b);
+
+	a = printf(" |%*.*ls|\n", -0, -12, ws);
+	b = ft_printf("f|%*.*ls|\n\n", -0, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", -0, -12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n",  -0, -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-*.*ls|\n", 0, -12, ws);
+	b = ft_printf("f|%-*.*ls|\n\n", 0, -12, ws);
+	print_error(a, b);
+
+	printf("*------------------------------------------------------*\n");
+	printf("*** **  *** 	CAS		[ %%x.*d ]	avec x et * negatif : 		// 26\n\n");
+
+	a = printf(" |%-.*ls|\n", -12, ws);
+	b = ft_printf("f|%-.*ls|\n\n",  -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-5.*ls|\n", -12, ws);
+	b = ft_printf("f|%-5.*ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.*ls|\n",  -5, ws);
+	b = ft_printf("f|%-12.*ls|\n\n",  -5, ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.*ls|\n", -12, ws);
+	b = ft_printf("f|%-12.*ls|\n\n", -12, ws);
+	print_error(a, b);
+
+	a = printf(" |%-12.*ls|\n", -0, ws);
+	b = ft_printf("f|%-12.*ls|\n\n", -0, ws);
+	print_error(a, b);
+
+
+
+
+
+
+
+/*printf("\n\n\n\t\t\t..-* HEXADECIMAL *-..\n");
 
 	int x;
 
@@ -2306,13 +2993,13 @@ ft_printf("%\\c\n", 98);
 	printf("ls int * = %ls\n", str_unicode);
 	printf("s wchar * = %s\n", str2_unicode);
 	printf("ls wchar * = %ls\n", str2_unicode);
-*/
+
 	setlocale(LC_ALL, NULL);
 	wchar_t wc = L'𢁅';
 
 	printf(" |%4lc\n", wc);
 	ft_printf("f|%lc\n", wc);
-
+*/
 //		printf(" |%c\n", 98);
 //	ft_printf("f|%c\n", 98);
 

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/19 15:34:02 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/22 18:59:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ struct		s_flag
 	char	specifiers;
 	LL		arg;
 	ULL		uarg;
+	char	*s;
+	wchar_t	*ls;
 	char	arg_error;
 };
 
@@ -104,7 +106,7 @@ char		*print_after(int nbr, char c, char *s, int *len);
 void		print_hexa(t_flag *flag, char *s);
 void		print_int(t_flag *flag, char *s);
 void		print_character(t_flag *flag);
-void		print_string(va_list args, t_flag *flag);
+void		print_string(t_flag *flag);
 
 /*
 ** Les fonctions utiles modifiées pour printf.

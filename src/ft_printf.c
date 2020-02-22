@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:47:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/02 17:12:12 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/22 16:05:26 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void		ft_struct_reset(t_flag *f)
 	f->specifiers = 0;
 	f->arg = 0;
 	f->uarg = 0;
+	f->s = NULL;
+	f->ls = NULL;
 	f->arg_error = 0;
 }
 
