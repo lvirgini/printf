@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/22 18:59:37 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/22 19:18:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int			ft_width_digit(const char *format, t_flag *flag);
 
 char		*convert_hexadecimal(t_flag *flag);
 char		*convert_adress(t_flag *flag);
-int			char_or_unicode(t_flag *flag);
-int			convert_unicode(t_flag *flag, int nb_oct);
+int			char_or_unicode(wchar_t arg);
+int			convert_unicode(wchar_t arg, int nb_oct);
 
 /*
 ** Les fonctions d'impression.

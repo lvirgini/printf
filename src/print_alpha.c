@@ -6,12 +6,40 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:28:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/22 18:59:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/22 20:26:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+/*
+**
+*/
+
+int		print_space(unsigned int len)
+{
+	char	s[len];
+	ft_memset((char *)s, ' ', len);
+	ft_putstr_fd_maxlen(s, 1, len);
+	return(len);
+}
+
+void		print_ls(t_flag *flag, wchar_t *ls, int len)
+{
+	int 	i;
+	int 	oct;
+	int		total_oct;
+
+	i = 0;
+	total_oct = 0;
+	while (ls[i])
+	{
+		oct = char_or_unicode(ls[i]);
+		if ((total_oct += oct) <= len)
+			flag->total_print += convert_unicode(ls[i], oct);
+		i++;
+	}
+}
 /*
 ** Impression des CHAR
 */
@@ -21,7 +49,7 @@ void	print_character(t_flag *flag)
 	int				nb_oct;
 	char			s[flag->width];
 
-	nb_oct = char_or_unicode(flag);
+	nb_oct = char_or_unicode(flag->uarg);
 	flag->total_print += nb_oct;
 	if (flag->width > nb_oct)
 	{
@@ -31,7 +59,7 @@ void	print_character(t_flag *flag)
 	}
 	if (flag->left == 1)
 	{
-		convert_unicode(flag, nb_oct);
+		convert_unicode(flag->uarg, nb_oct);
 		if (flag->width > nb_oct)
 			ft_putstr_fd_maxlen(s, 1, flag->width);
 	}
@@ -39,7 +67,7 @@ void	print_character(t_flag *flag)
 	{
 		if (flag->width > nb_oct)
 			ft_putstr_fd_maxlen(s, 1, flag->width);
-		convert_unicode(flag, nb_oct);
+		convert_unicode(flag->uarg, nb_oct);
 	}
 }
 /*
@@ -50,72 +78,35 @@ void	print_string_unicode(t_flag *flag)
 {
 	int		i;
 	int 	len;
-	int 	nb;
 	wchar_t *ls;
-	int		total_nb;
 
 	ls = flag->ls;
 	i = 0;
 	len = 0;
-	total_nb = 0;
-
 	while (ls[i])
 	{
-		flag->uarg = ls[i];
-			len += char_or_unicode(flag);
+		len += char_or_unicode(ls[i]);
 		if (flag->precision < len && flag->precision != -1)
 		{
-			len -= char_or_unicode(flag);
+			len -= char_or_unicode(ls[i]);
 			if (len > 0 && flag->precision - len > flag->width)
 				flag->width += (flag->precision - len);
 			break;
 		}
 		i++;
 	}
-	i = 0;
 	if (flag->left == 1)
 	{
-		while (ls[i])
-		{
-			flag->uarg = ls[i];
-			nb = char_or_unicode(flag);
-			total_nb += nb;
-			if ((total_nb) <= len)
-			{
-				convert_unicode(flag, nb);
-				flag->total_print += nb;
-			}
-			i++;
-		}
-		while (flag->width > len)
-		{
-			ft_putchar_fd(' ', 1);
-			flag->width--;
-			flag->total_print += 1;
-		}
+		print_ls(flag, ls, len);
+		if((flag->width - len) > 0)
+			flag->total_print += print_space(flag->width - len);
 	}
 	else
 	{
-		while (flag->width > len)
-		{
-			ft_putchar_fd(' ', 1);
-			flag->width--;;
-			flag->total_print += 1;
-		}
-		while (ls[i])
-		{
-			flag->uarg = ls[i];
-			nb = char_or_unicode(flag);
-			total_nb += nb;
-			if ((total_nb) <= len)
-			{
-				convert_unicode(flag, nb);
-				flag->total_print += nb;
-			}
-			i++;
-		}
+		if((flag->width - len) > 0)
+			flag->total_print += print_space(flag->width - len);
+		print_ls(flag, ls, len);
 	}
-	//flag->total_print += len;
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:50:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/22 18:45:43 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/22 19:13:25 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2234,7 +2234,7 @@ printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
 	print_error(a, b);
 
 
-
+	ft_printf("%.p", NULL);
 
 
 
