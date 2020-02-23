@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:50:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 13:42:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:02:17 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@
 #include "../src/ft_printf.h"
  #include <wchar.h>
 
+void print_binaire(unsigned wc) //
+{
+	int i;
+	printf("%d en binaire :\t", wc);
+	for (i = 31; i >= 0; i--)
+	{
+		printf("%d", (wc >> i ) & 1);
+		if (i % 4 == 0)
+			printf(" ");
+	}
+	printf("\n"); 
+}
 
 /*
 ** le - 1 car tous les ft_printf ont un \n en plus
@@ -2818,10 +2830,12 @@ result2 = ft_printf("le int max = %d\nuint max = %u\nune adresse = %p\nun hexade
 
 ft_printf("result 1 = %d\n result 2 = %d\n", result, result2);
 
+
+/*
 result = printf(" |%lhhlt|\n");
 result2 = ft_printf("f|%lhhlt|\n");
 ft_printf("result 1 = %d\nresult 2 = %d\n", result, result2);
-/*
+
 printf(" |%llu|\n", ULLONG_MAX);
 ft_printf("f|%llu|\n", (unsigned long long)~0);
 ft_printf("f|%llu|\n", ULLONG_MAX);

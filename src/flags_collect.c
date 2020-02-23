@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collect_g_flags.c                                    :+:      :+:    :+:   */
+/*   flags_collect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 14:47:16 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/02 17:13:27 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/23 14:28:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** Determination de tous les g_flags.
+** Recuperation de tous les flags.
 */
 
-int			ft_what_options(const char *format,	va_list args)
+int			flag_collect(const char *format, va_list args)
 {
 	int i;
 
@@ -30,27 +30,37 @@ int			ft_what_options(const char *format,	va_list args)
 	{
 		if (format[i] == '0')
 			g_flag->zero = 1;
-		if (format[i] == '-')
+		else if (format[i] == '-')
 			g_flag->left = 1;
-		if (format[i] == '*' && ((g_flag->width = va_arg(args, int)) < 0))
-		{
-			g_flag->width *= -1;
-			g_flag->left = 1;
-		}
-		if (ft_isdigit(format[i]))
-			i += ft_width_digit(format + i) - 1;
+		else if (format[i] == '*')
+			flag_width_is_arg(args);
+		else if (ft_isdigit(format[i]))
+			i += flag_width_is_digit(format + i) - 1;
 		i++;
 	}
 	if (format[i] == '.' && (g_flag->zero = 0) == 0)
-		i = ft_precision(format, i + 1, args);
-	return (ft_dispatch_type(format, i, args));
+		i = flag_precision(format, i + 1, args);
+	return (type_dispatch(format, i, args));
 }
 
 /*
-**	largeur de champs : si elle est inscrite dans la chaine format;
+** largeur de champs : si elle est dans un argument.
 */
 
-int			ft_width_digit(const char *format)
+void		flag_width_is_arg(va_list args)
+{
+	if ((g_flag->width = va_arg(args, int)) < 0)
+	{
+		g_flag->width *= -1;
+		g_flag->left = 1;
+	}
+}
+
+/*
+**	largeur de champs : si elle est inscrite dans la chaine format.
+*/
+
+int			flag_width_is_digit(const char *format)
 {
 	char	*tmp;
 	int		j;
@@ -61,14 +71,14 @@ int			ft_width_digit(const char *format)
 	tmp = ft_substr(format, 0, j);
 	g_flag->width = ft_atoi(tmp);
 	free(tmp);
-	return (j); 
+	return (j);
 }
 
 /*
 ** Récupère la precision.
 */
 
-int			ft_precision(const char *s, int i, va_list args)
+int			flag_precision(const char *s, int i, va_list args)
 {
 	int		neg;
 
@@ -85,7 +95,7 @@ int			ft_precision(const char *s, int i, va_list args)
 		}
 	}
 	else if (ft_isdigit(s[i]))
-		i += ft_precision_is_digit(s + i);
+		i += flag_precision_is_digit(s + i);
 	else
 		g_flag->precision = 0;
 	if (neg == -1 && g_flag->precision != 0)
@@ -97,10 +107,10 @@ int			ft_precision(const char *s, int i, va_list args)
 }
 
 /*
-** Suite de ft_précision : si c'est inscrit dans la chaine format.
+** Suite de précision : si c'est inscrit dans la chaine format.
 */
 
-int			ft_precision_is_digit(const char *s)
+int			flag_precision_is_digit(const char *s)
 {
 	char	*tmp;
 	int		j;
