@@ -6,13 +6,10 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 17:51:06 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/23 17:58:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// ATTENTION retirer stdio.h + verif des retrait de tous printf
-// verifier uint max pour utoa et retirer ses commentaires,
-// tester si 4 arg OK mais 5eme mauvais :
 // verififier les valeurs de retour de malloc si non fonctionnel
 
 #ifndef FT_PRINTF_H
