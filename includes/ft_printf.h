@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 16:13:10 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/23 17:51:06 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # include <unistd.h>
 # include <stddef.h>
 # include "../libft/libft.h"
-# include <stdio.h> //
 
 typedef struct s_flag	t_flag;
 

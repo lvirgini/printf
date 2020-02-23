@@ -6,69 +6,66 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2020/01/29 16:24:37 by lvirgini         ###   ########.fr        #
+#    Updated: 2020/02/23 17:19:06 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 #			VARIABLES				#
-#	nom, sources et localisations	#
-#									#
 
 NAME =		libftprintf.a
 
-LIBFT_A =	libft.a
-
-LIB_DIR =	./libft/
-SRC_DIR =	./src/
+LIB_DIR =	libft/
 OBJ_DIR =	obj/
+SRC_DIR =	$(shell find src -type d)
+INC_DIR = 	$(shell find includes -type d) $(LIB_DIR) .
 
-PRINTF_H =	-I $(SRC_DIR)
-LIBFT_H = 	-I $(LIB_DIR)
+LIB		=	ft
 
-HEADERS =	$(SRC_DIR)ft_printf.h \
-			$(LIB_DIR)libft.h
-
-SRC =		ft_printf.c 		\
-			collect_flags.c 	\
-			conversion.c 		\
-			ft_printf_utils.c 	\
-			make_options.c		\
-			print_number.c		\
+SRC 	=	ft_printf.c 		\
+			ft_printf_utils.c	\
+			flags_collect.c 	\
 			type_args.c			\
-			print_alpha.c
+			init_and_clean.c 	\
+			conversion.c 		\
+			dispatch.c 			\
+			make_options.c		\
+			print_character.c 	\
+			print_number.c 		\
+			print_string.c 		\
+			unicode.c
 
-OBJ =		$(addprefix $(OBJ_DIR), $(SRC:%.c=%.o))
+vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
-#	VARIABLES		#
-#	Compilation		#
-#					#
+OBJ 	=	$(addprefix $(OBJ_DIR), $(SRC:%.c=%.o))
+
+
+#	COMPILATION		#
 
 CC = 		gcc
 
-CFLAGS = 	-Wall -Werror -Wextra
-
-COMP =		$(CC) $(CFLAGS) $(PRINTF_H) $(LIBFT_H)
+CFLAG = 	-Wall -Werror -Wextra -fsanitize=address -g
+IFLAG = 	$(foreach dir, $(INC_DIR), -I $(dir) )
+LFLAG  =	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir) )
 
 
 #	FONCTIONS	#
 
-%.o: %.c
-			$(CC) $(CFLAGS) -o $@ -c $< 
 
-all: $(NAME)
+all:		$(NAME)
 
-$(LIBFT_A):
+$(LIB):
 			make -C $(LIB_DIR) all
 
-$(NAME): $(LIBFT_A) $(OBJ) 
+$(OBJ_DIR)%.o: %.c
+			mkdir -p $(OBJ_DIR)
+			$(CC) $(CFLAG) $(IFLAG) -o $@ -c $<
+
+$(NAME): 	$(LIB) $(OBJ) 
+			
 			ar rc $(NAME) $(OBJ)
 			ranlib $(NAME)
-			libtool -static -o libftprintf.a $(LIB_DIR)$(LIBFT_A)
-
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
-			mkdir -p $(OBJ_DIR)
-			$(COMP) -o $@ -c $<
+			libtool -static -o $@ ./libft/libft.a
 
 
 # 	CLEAN	#
