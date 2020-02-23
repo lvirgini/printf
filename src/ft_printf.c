@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:47:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/22 16:05:26 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/23 12:23:53 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,42 @@
 ** Initialization de la structure
 */
 
-static void		ft_struct_reset(t_flag *f)
+t_flag	*g_flag;
+
+static void		ft_struct_reset(void)
 {
-	f->left = 0;
-	f->zero = 0;
-	f->width = 0;
-	f->precision = -1;
-	f->specifiers = 0;
-	f->arg = 0;
-	f->uarg = 0;
-	f->s = NULL;
-	f->ls = NULL;
-	f->arg_error = 0;
+	g_flag->left = 0;
+	g_flag->zero = 0;
+	g_flag->width = 0;
+	g_flag->precision = -1;
+	g_flag->specifiers = 0;
+	g_flag->arg = 0;
+	g_flag->uarg = 0;
+	g_flag->s = NULL;
+	g_flag->ls = NULL;
+	g_flag->arg_error = 0;
 }
 
 static t_flag	*ft_initialize_struct(void)
 {
-	t_flag *f;
 
-	if (!(f = (t_flag *)malloc(sizeof(*f))))
+	if (!(g_flag = (t_flag *)malloc(sizeof(*g_flag))))
 		return (NULL);
-	f->total_print = 0;
-	ft_struct_reset(f);
-	return (f);
+	g_flag->total_print = 0;
+	ft_struct_reset();
+	return (g_flag);
 }
 
 /*
 ** Free de la structure et renvoie le total imprimé par printf.
 */
 
-static int		ft_clean_end(t_flag *flag)
+static int		ft_clean_end()
 {
 	int total_print;
 
-	total_print = flag->total_print;
-	free(flag);
+	total_print = g_flag->total_print;
+	free(g_flag);
 	return (total_print);
 }
 
@@ -58,34 +59,34 @@ static int		ft_clean_end(t_flag *flag)
 **	lecture de la chaine *format.
 **	Recherche du %
 **	Print la partie de la chaine en s'arretant au %
-**	Envoi pour verification, recuperation, conversion et print du flag.
+**	Envoi pour verification, recuperation, conversion et print du g_flag.
 */
 
 int				ft_printf(const char *restrict format, ...)
 {
 	unsigned int	len;
 	va_list			args;
-	t_flag			*flag;
+
 
 	va_start(args, format);
-	if (!*format || !(flag = ft_initialize_struct()))
+	if (!*format || !(g_flag = ft_initialize_struct()))
 		return (-1);
 	while (format)
 	{
 		
 		len = ft_strchr_i(format, '%');
 		ft_putstr_fd_maxlen((char *)format, 1, len);
-		flag->total_print += len;
+		g_flag->total_print += len;
 		if (format[len] == '\0')
-			return (ft_clean_end(flag));
+			return (ft_clean_end());
 		if (format[len] == '%')
 		{
 			len++;
-			len += ft_what_options(format + len, args, flag);
-			ft_struct_reset(flag);
+			len += ft_what_options(format + len, args);
+			ft_struct_reset();
 		}
 		format += len;
 	}
 	va_end(args);
-	return (ft_clean_end(flag));
+	return (ft_clean_end());
 }

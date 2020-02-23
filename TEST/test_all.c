@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:50:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/22 19:13:25 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/23 13:42:36 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1489,7 +1489,7 @@ printf("\n\n\n\t\t\t..-* CHAR C *-..\n");
 	printf(" |%-*c|\n", 30, c);
 	ft_printf("f|%-*c|\n\n", 30, c);
 
-printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
+*/printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
 
 
 	// CHAR 0 | 'c' | 0 a 256 au dessus |
@@ -1576,7 +1576,7 @@ printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
 	b = ft_printf("f|%-*lc|\n\n", 30, wc);
 	print_error(a, b);
 
-*/printf("\n\n\n\t\t\t..-* L STRING  unicode *-..\n");
+printf("\n\n\n\t\t\t..-* L STRING  unicode *-..\n");
 	printf("\t\t*°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°*\n");
 
 	wchar_t *ws;
@@ -2800,7 +2800,7 @@ printf("\n\n\n\t\t\t..-* ADRESSE *-..\n");
 	printf("%d ",	printf(" |%-*p|\n", 30, p));
 	ft_printf("%d", ft_printf("f|%-*p|\n", 30, p));
 
-printf("\n\n\n\t\t\t..-* CUMUL *-..\n");
+*/printf("\n\n\n\t\t\t..-* CUMUL *-..\n");
 
 
 int cumul_x = 179383791;
@@ -2821,7 +2821,7 @@ ft_printf("result 1 = %d\n result 2 = %d\n", result, result2);
 result = printf(" |%lhhlt|\n");
 result2 = ft_printf("f|%lhhlt|\n");
 ft_printf("result 1 = %d\nresult 2 = %d\n", result, result2);
-
+/*
 printf(" |%llu|\n", ULLONG_MAX);
 ft_printf("f|%llu|\n", (unsigned long long)~0);
 ft_printf("f|%llu|\n", ULLONG_MAX);
@@ -2884,53 +2884,55 @@ ft_printf("%\\c\n", 98);
 	printf("\n");
 	nbr = ft_printf("%%");
 	printf("\n");
+*/
+/*
+				printf(" |%x|\n", -42);
+				ft_printf("f|%x|\n", -42);
 
-	printf(" |%x|\n", -42);
-	ft_printf("f|%x|\n", -42);
+				printf(" |%x|\n", 42);
+				ft_printf("f|%x|\n", 42);
 
-	printf(" |%x|\n", 42);
-	ft_printf("f|%x|\n", 42);
+					printf(" |%x|\n", 0);
+				ft_printf("f|%x|\n", 0);
 
-		printf(" |%x|\n", 0);
-	ft_printf("f|%x|\n", 0);
+				printf(" |%p|\n", NULL);
+				ft_printf("f|%p|\n", NULL);
 
-		printf(" |%p|\n", NULL);
-	ft_printf("f|%p|\n", NULL);
+				printf(" |%.p|\n", NULL);
+				ft_printf("f|%.p|\n", NULL);
 
-	printf( "%.0d", 0 );
-	ft_printf( "%.0d", 0 );
-	printf("\n");
+				printf( "%.0d", 0 );
+				ft_printf( "%.0d", 0 );
 
-
-	setlocale(LC_ALL, NULL);
-    //int c = L'é';
-	
-	setlocale(LC_ALL,"");
-	printf("|%C|\n", L'𢁅');
-	//printf("|%lc|\n", L'𢁅');
-	//printf("|%c|\n", L'𢁅');
-	//ft_printf("%lc\n\n", L'𢁅');
-
-	//printf("%hc\n", 100);
-	//ft_printf("%hc\n", 100);
-
-	printf("ο Δικαιοπολις εν αγρω εστιν\n");
-	ft_printf("ο Δικαιοπολις εν αγρω εστιν\n\n");
+				printf( "%.d", 0 );
+				ft_printf( "%.d", 0 );
+				printf("\n");
+*/
+/*
 
 	char	*ptr_vide = NULL;
-	ft_printf(" |%.5s|\n", ptr_vide);
-	printf("f|%.5s|\n", ptr_vide);
-
-	ft_printf(" |%.15s|\n", ptr_vide);
-	printf("f|%.15s|\n", ptr_vide);
 	
-	ft_printf(" |%p|\n", 18);
-	printf("f|%p|\n", 18);
+	a = printf(" |%.5s|\n", ptr_vide);
+	b = ft_printf("f|%.5s|\n", ptr_vide);
+	
+	a = printf(" |%.15s|\n", ptr_vide);
+	b = ft_printf("f|%.15s|\n", ptr_vide);
+	
+	a = printf(" |%p|\n", 18);
+	b = ft_printf("f|%p|\n", 18);
+	
 
 	
 	printf(" |%lx|\n", 140731234556040 );
 	ft_printf("f|%lx|\n\n", 140731234556040 );
 
+	printf(" |%x|\n", 140731234556040 );
+	ft_printf("f|%x|\n\n", 140731234556040 );
+
+	printf(" |%hx|\n", 140731234556040 );
+	ft_printf("f|%hx|\n\n", 140731234556040 );
+*/
+/*
 	printf(" |%x|\n", -1 );
 	ft_printf("f|%x|\n\n", -1);
 
@@ -2948,26 +2950,26 @@ ft_printf("%\\c\n", 98);
 
 	printf(" |%llu|\n", -1 );
 	ft_printf("f|%llu|\n\n", -1);
+*/
 
 //	printf(" |%llx|\n", 140731234556040 );
 //	ft_printf("f|%llx|\n\n", 140731234556040 );
 
-	printf("%lllkkkk\n", 5);
+/*	printf("%lllkkkk\n", 5);
 	ft_printf("%lllkkkk\n", 5);
 
+	printf("%hld\n", 140731234556040);
+	ft_printf("%hld\n", 140731234556040);
 
-
-	setlocale(LC_ALL, NULL);
-    //int c = L'é';
-	
-	setlocale(LC_ALL,"");
 	printf("1|%C|\n", L'𢁅');
 	printf("2|%lc|\n", L'𢁅');
+	ft_printf("2|%lc|\n\n", L'𢁅');
 	printf("3|%c|\n", L'𢁅');
-	ft_printf("3|%lc|\n\n", L'𢁅');
+	ft_printf("3|%c|\n", L'𢁅');
 
-	//printf("4|%hc|\n", 100);
-	//ft_printf("4|%hc|\n", 100);
+
+	//	printf("4|%hc|\n", 100);  WARNING
+	//	ft_printf("4|%hc|\n", 100);
 
 
 	printf("ο Δικαιοπολις εν αγρω εστιν\n");
@@ -2976,33 +2978,42 @@ ft_printf("%\\c\n", 98);
 	printf("%%s = %s\n", "ο Δικαιοπολις εν αγρω εστιν\n");
 	ft_printf("%%s = %s\n", "ο Δικαιοπολις εν αγρω εστιν\n\n");
 
-	int a = L'𢁅';
-	wchar_t b = L'ﷰ';
+	wc = L'𢁅';
+	wc = L'ﷰ';
 	int *str_unicode = L"ﷰ𢁅Διﷰκαιοπολις";
 	wchar_t *str2_unicode = L"ﷰ𢁅Διﷰκαιοπολις";
-	printf("c int = %c\n", a);
-	printf("c wchar = %c\n", b);
 
-	printf("lc int =  |%lc|\n", a);
-	ft_printf("lc int = f|%lc|\n\n", a);
+	printf("c int = %c\n", wc);
+	ft_printf("c int = %c\n", wc);
+
+	printf("c wchar = %c\n", wc);	
+	ft_printf("c wchar = %c\n\n", wc);
+
+	printf("lc int =  |%lc|\n", wc);
+	ft_printf("lc int = f|%lc|\n\n", wc);
 	
-	printf("lc int = %lc\n", a);
-	printf("lc wtchar = %lc\n", b);
+	printf("lc int = %lc\n", wc);
+	ft_printf("lc int = %lc\n\n", wc);
+
+	printf("lc wtchar = %lc\n", wc);
+	ft_printf("lc wtchar = %lc\n\n", wc);
 
 	printf("s int * = %s\n", str_unicode);
+	ft_printf("s int * = %s\n\n", str_unicode);
+
 	printf("ls int * = %ls\n", str_unicode);
+	ft_printf("ls int * = %ls\n\n", str_unicode);
+
 	printf("s wchar * = %s\n", str2_unicode);
+	ft_printf("s wchar * = %s\n\n", str2_unicode);
+
 	printf("ls wchar * = %ls\n", str2_unicode);
+	ft_printf("ls wchar * = %ls\n\n", str2_unicode);
 
-	setlocale(LC_ALL, NULL);
-	wchar_t wc = L'𢁅';
 
-	printf(" |%4lc\n", wc);
-	ft_printf("f|%lc\n", wc);
-*/
 //		printf(" |%c\n", 98);
 //	ft_printf("f|%c\n", 98);
-
+*/
 return (0);
 
 }

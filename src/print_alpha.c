@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:28:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/22 20:26:34 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/23 12:26:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		print_space(unsigned int len)
 	return(len);
 }
 
-void		print_ls(t_flag *flag, wchar_t *ls, int len)
+void		print_ls(wchar_t *ls, int len)
 {
 	int 	i;
 	int 	oct;
@@ -36,7 +36,7 @@ void		print_ls(t_flag *flag, wchar_t *ls, int len)
 	{
 		oct = char_or_unicode(ls[i]);
 		if ((total_oct += oct) <= len)
-			flag->total_print += convert_unicode(ls[i], oct);
+			g_flag->total_print += convert_unicode(ls[i], oct);
 		i++;
 	}
 }
@@ -44,68 +44,68 @@ void		print_ls(t_flag *flag, wchar_t *ls, int len)
 ** Impression des CHAR
 */
 
-void	print_character(t_flag *flag)
+void	print_character(void)
 {
 	int				nb_oct;
-	char			s[flag->width];
+	char			s[g_flag->width];
 
-	nb_oct = char_or_unicode(flag->uarg);
-	flag->total_print += nb_oct;
-	if (flag->width > nb_oct)
+	nb_oct = char_or_unicode(g_flag->uarg);
+	g_flag->total_print += nb_oct;
+	if (g_flag->width > nb_oct)
 	{
-		flag->width -= nb_oct;
-		ft_memset((char *)s, ' ', flag->width);
-		flag->total_print += flag->width;
+		g_flag->width -= nb_oct;
+		ft_memset((char *)s, ' ', g_flag->width);
+		g_flag->total_print += g_flag->width;
 	}
-	if (flag->left == 1)
+	if (g_flag->left == 1)
 	{
-		convert_unicode(flag->uarg, nb_oct);
-		if (flag->width > nb_oct)
-			ft_putstr_fd_maxlen(s, 1, flag->width);
+		convert_unicode(g_flag->uarg, nb_oct);
+		if (g_flag->width > nb_oct)
+			ft_putstr_fd_maxlen(s, 1, g_flag->width);
 	}
 	else
 	{
-		if (flag->width > nb_oct)
-			ft_putstr_fd_maxlen(s, 1, flag->width);
-		convert_unicode(flag->uarg, nb_oct);
+		if (g_flag->width > nb_oct)
+			ft_putstr_fd_maxlen(s, 1, g_flag->width);
+		convert_unicode(g_flag->uarg, nb_oct);
 	}
 }
 /*
 ** Impression des W CHAR *
 */
 
-void	print_string_unicode(t_flag *flag)
+void	print_string_unicode(void)
 {
 	int		i;
 	int 	len;
 	wchar_t *ls;
 
-	ls = flag->ls;
+	ls = g_flag->ls;
 	i = 0;
 	len = 0;
 	while (ls[i])
 	{
 		len += char_or_unicode(ls[i]);
-		if (flag->precision < len && flag->precision != -1)
+		if (g_flag->precision < len && g_flag->precision != -1)
 		{
 			len -= char_or_unicode(ls[i]);
-			if (len > 0 && flag->precision - len > flag->width)
-				flag->width += (flag->precision - len);
+			if (len > 0 && g_flag->precision - len > g_flag->width)
+				g_flag->width += (g_flag->precision - len);
 			break;
 		}
 		i++;
 	}
-	if (flag->left == 1)
+	if (g_flag->left == 1)
 	{
-		print_ls(flag, ls, len);
-		if((flag->width - len) > 0)
-			flag->total_print += print_space(flag->width - len);
+		print_ls(ls, len);
+		if((g_flag->width - len) > 0)
+			g_flag->total_print += print_space(g_flag->width - len);
 	}
 	else
 	{
-		if((flag->width - len) > 0)
-			flag->total_print += print_space(flag->width - len);
-		print_ls(flag, ls, len);
+		if((g_flag->width - len) > 0)
+			g_flag->total_print += print_space(g_flag->width - len);
+		print_ls(ls, len);
 	}
 }
 
@@ -113,34 +113,34 @@ void	print_string_unicode(t_flag *flag)
 ** Impression des CHAR *
 */
 
-void	print_string(t_flag *flag)
+void	print_string(void)
 {
 	int		len;
 	char	*(*f)(int, char, char *, int *);
 
-	if (flag->ls != NULL)
-		print_string_unicode(flag);
+	if (g_flag->ls != NULL)
+		print_string_unicode();
 	else
 	{
-		if (!flag->s)
+		if (!g_flag->s)
 		{
-			//if (flag->precision < 6 && flag->precision != -1)
+			//if (g_flag->precision < 6 && g_flag->precision != -1)
 			//	s = "";
 			//else
-				flag->s = "(null)";
+				g_flag->s = "(null)";
 		}
-		len = ft_strlen(flag->s);
-		if (flag->precision < len && flag->precision != -1)
-			len = flag->precision;
-		flag->s = ft_substr(flag->s, 0, len);
-		if (flag->left == 1)
+		len = ft_strlen(g_flag->s);
+		if (g_flag->precision < len && g_flag->precision != -1)
+			len = g_flag->precision;
+		g_flag->s = ft_substr(g_flag->s, 0, len);
+		if (g_flag->left == 1)
 			f = &print_after;
 		else
 			f = &print_before;
-		if (flag->width > len)
-			flag->s = f(flag->width, ' ', flag->s, &len);
-		ft_putstr_fd(flag->s, 1);
-		flag->total_print += len;
-		free(flag->s);
+		if (g_flag->width > len)
+			g_flag->s = f(g_flag->width, ' ', g_flag->s, &len);
+		ft_putstr_fd(g_flag->s, 1);
+		g_flag->total_print += len;
+		free(g_flag->s);
 	}
 }
