@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 16:09:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 14:23:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:15:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		type_size(const char *format, int i, va_list args)
 			f = &type_long;
 		++j;
 	}
-	g_flag->specifiers = format[i + j + 1];
+	g_flag->specifiers = format[i + j];
 	return (f(format, i, args));
 }
 
@@ -49,6 +49,8 @@ int		type_classic(const char *format, int i, va_list args)
 		g_flag->uarg = (ULL)va_arg(args, ULL);
 	else if ((format[i] == 's'))
 		g_flag->s = va_arg(args, char *);
+	else if((format[i] == '%'))
+		;
 	else
 		g_flag->arg_error = 1;
 	return (i);

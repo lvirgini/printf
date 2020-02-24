@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:35:47 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 16:06:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/24 18:16:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ int		print_unicode(wchar_t arg, int nb_oct)
 	unsigned char	octet[nb_oct];
 
 	ft_bzero(octet, nb_oct);
-	if (nb_oct == 1)
-		octet[0] = (unsigned char)arg;
-	else if (nb_oct == 2)
+	octet[0] = (unsigned char)arg;
+	if (nb_oct == 2)
 	{
 		octet[0] = (((unsigned)arg >> 6) & 0x1F) | 0xC0;
 		octet[1] = ((unsigned)arg & 0x3F) | 0x80;
@@ -91,13 +90,14 @@ int		print_unicode(wchar_t arg, int nb_oct)
 		octet[1] = (((unsigned)arg >> 6) & 0x3F) | 0x80;
 		octet[2] = ((unsigned)arg & 0x3F) | 0x80;
 	}
-	else
+	else if (nb_oct == 4)
 	{
 		octet[0] = (((unsigned)arg >> 18) & 7) | 0xF0;
 		octet[1] = (((unsigned)arg >> 12) & 0x3F) | 0x80;
 		octet[2] = (((unsigned)arg >> 6) & 0x3F) | 0x80;
 		octet[3] = ((unsigned)arg & 0x3F) | 0x80;
 	}
-	write(1, octet, nb_oct);
+	if (nb_oct != 0 && (g_flag->total_print += nb_oct))
+		write(1, octet, nb_oct);
 	return (nb_oct);
 }

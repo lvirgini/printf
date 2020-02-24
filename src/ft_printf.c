@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:47:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 14:32:22 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:20:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_printf(const char *restrict format, ...)
 	va_list			args;
 
 	va_start(args, format);
-	if (!*format || !(g_flag = struct_malloc()))
+	if (!format || !(g_flag = struct_malloc()))
 		return (-1);
 	while (format)
 	{

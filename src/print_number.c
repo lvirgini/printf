@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:39:07 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 12:26:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:35:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_hexa(char *s)
 	if (g_flag->specifiers == 'p' && s)
 		f = &print_before_0x;
 	if (!s)
-		s = ft_strdup("(null)");
+		s = ft_strdup("0");
 	if (g_flag->precision == 0 && s[0] == '0' && ft_strlen(s) == 1)
 		s[0] = '\0';
 	len = ft_strlen(s);
