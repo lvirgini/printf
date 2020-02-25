@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 14:12:08 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/25 12:46:10 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 15:11:53 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@ int		type_dispatch(const char *format, int i, va_list args)
 		write(1, "%%", 1);
 		return (1);
 	}
-	if (format[i] == '%')
+	if (format[i] == '%' && (g_flag->uarg = '%') == '%')
+		print_percent();
+	if (format[i] == 'c')
 	{
-		g_flag->uarg = '%';
+		if (format[i - 1] == 'l')
+			print_wchar(size_unicode(g_flag->uarg));
 		print_character();
 	}
-	if (format[i] == 'c')
-		print_character();
 	else if (format[i] == 's')
 		print_string();
 	else if (format[i] == 'p')
-		print_hexa((convert_adress()));
+		print_hexa((convert_adress(format[i - 1])));
 	else if ((format[i] == 'd' || format[i] == 'i'))
 		print_int(ft_lltoa(g_flag->arg));
 	else if (format[i] == 'u')

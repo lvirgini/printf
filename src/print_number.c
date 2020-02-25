@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:39:07 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/24 16:35:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 13:37:08 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	print_hexa(char *s)
 	len = ft_strlen(s);
 	if (g_flag->precision > len)
 		s = f(g_flag->precision, '0', s, &len);
-	len = ft_strlen(s);
 	if (g_flag->zero && g_flag->width > len && g_flag->left == 0)
 		s = f(g_flag->width, '0', s, &len);
 	f = &print_before;

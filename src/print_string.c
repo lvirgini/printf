@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 14:33:14 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 17:11:56 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:36:06 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		print_ls(wchar_t *ls, int len)
 	{
 		oct = size_unicode(ls[i]);
 		if ((total_oct += oct) <= len)
-			g_flag->total_print += print_unicode(ls[i], oct);
+			print_unicode(ls[i], oct);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/25 12:50:15 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 15:10:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			flag_width_is_digit(const char *format);
 */
 
 char		*convert_hexadecimal(void);
-char		*convert_adress(void);
+char		*convert_adress(char format);
 int			size_unicode(wchar_t arg);
 int			print_unicode(wchar_t arg, int nb_oct);
 
@@ -85,12 +85,14 @@ char		*print_before_sign(int max, char c, char *s, int *len);
 char		*print_after(int nbr, char c, char *s, int *len);
 void		print_hexa(char *s);
 void		print_int(char *s);
-void		print_character(void);
+int			print_character(void);
 void		print_string(void);
 void		print_string_unicode(void);
 void		print_string_unicode2(wchar_t *ls, int len);
 int			print_space(unsigned int len);
 void		print_ls(wchar_t *ls, int len);
+int			print_wchar(int nb_oct);
+void		print_percent(void);
 
 /*
 ** Fonctions d'initialisation et de clean.
