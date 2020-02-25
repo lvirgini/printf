@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2020/02/24 15:13:43 by lvirgini         ###   ########.fr        #
+#    Updated: 2020/02/25 17:14:50 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ NAME =		libftprintf.a
 LIB_DIR =	libft/
 OBJ_DIR =	obj/
 SRC_DIR =	$(shell find src -type d)
-#INC_DIR = 	$(shell find includes -type d) $(LIB_DIR) ./src
 
 LIB		=	ft
 
@@ -45,7 +44,6 @@ CC = 		gcc
 
 CFLAG = 	-Wall -Werror -Wextra 
 IFLAG = 	-I src/ -I libft/	
-#IFLAG = 	$(foreach dir, $(INC_DIR), -I $(dir) )
 LFLAG  =	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir) )
 
 
@@ -57,16 +55,18 @@ all:		$(NAME)
 $(LIB):
 			make -C $(LIB_DIR) all
 
-$(OBJ_DIR)%.o: %.c
+$(OBJ_DIR)%.o: %.c src/ft_printf.h
 			mkdir -p $(OBJ_DIR)
-			$(CC) $(CFLAG) -I src/ -o $@ -c $<
+			$(CC) $(CFLAG) $(IFLAG) -o $@ -c $<
 
 $(NAME): 	$(LIB) $(OBJ)
 			cp $(LIB_DIR)/libft.a $@
-			ar rcs $(NAME) $(OBJ) 
+			ar rcs $(NAME) $(OBJ)
 
+bonus : all
 
 # 	CLEAN	#
+
 
 clean:
 			rm -rf $(OBJ_DIR)

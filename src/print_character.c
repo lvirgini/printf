@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:28:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/25 15:20:48 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 19:18:27 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		print_character(void)
 	return (0);
 }
 
-
 int		print_wchar(int nb_oct)
 {
 	char			s[g_flag->width];
@@ -70,8 +69,11 @@ int		print_wchar(int nb_oct)
 	return (0);
 }
 
+/*
+** Si pas de flg mais un %
+*/
 
-void		print_percent(void)
+void	print_percent(void)
 {
 	char			s[g_flag->width];
 
@@ -80,7 +82,7 @@ void		print_percent(void)
 	{
 		g_flag->width -= 1;
 		g_flag->total_print += g_flag->width;
-		if ((g_flag->zero == 1 || g_flag->precision != -1) && g_flag->left == 0)
+		if ((g_flag->zero == 1 && g_flag->precision != -1) && g_flag->left == 0)
 			ft_memset((char *)s, '0', g_flag->width);
 		else
 			ft_memset((char *)s, ' ', g_flag->width);

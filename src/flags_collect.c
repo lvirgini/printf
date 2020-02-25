@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 14:47:16 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 14:28:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 20:16:06 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			flag_collect(const char *format, va_list args)
 			i += flag_width_is_digit(format + i) - 1;
 		i++;
 	}
-	if (format[i] == '.' && (g_flag->zero = 0) == 0)
+	if (format[i] == '.')
 		i = flag_precision(format, i + 1, args);
 	return (type_dispatch(format, i, args));
 }
@@ -93,6 +93,7 @@ int			flag_precision(const char *s, int i, va_list args)
 				g_flag->width = g_flag->precision * -1;
 			g_flag->precision = -1;
 		}
+		g_flag->zero = g_flag->precision >= 0 ? 0 : g_flag->zero;
 	}
 	else if (ft_isdigit(s[i]))
 		i += flag_precision_is_digit(s + i);
@@ -124,6 +125,7 @@ int			flag_precision_is_digit(const char *s)
 		if ((g_flag->precision = ft_atoi(tmp)) < 0)
 			g_flag->precision = -1;
 		free(tmp);
+		g_flag->zero = 0;
 	}
 	return (j);
 }
