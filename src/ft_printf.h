@@ -6,16 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/24 13:43:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 12:50:15 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// verififier les valeurs de retour de malloc si non fonctionnel
-
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define LL long long int
-# define ULL unsigned long long int
 
 /*
 ** Les Includes
@@ -26,7 +22,13 @@
 # include <stddef.h>
 # include "../libft/libft.h"
 
-typedef struct s_flag	t_flag;
+/*
+** Les Typedefs
+*/
+
+typedef struct s_flag			t_flag;
+typedef long long int			t_ll;
+typedef unsigned long long int	t_ull;
 
 struct		s_flag
 {
@@ -36,15 +38,15 @@ struct		s_flag
 	int		precision;
 	int		total_print;
 	char	specifiers;
-	LL		arg;
-	ULL		uarg;
+	t_ll	arg;
+	t_ull	uarg;
 	char	*s;
 	wchar_t	*ls;
 	char	arg_error;
 };
 
 /*
-** Les fonctions qui récupère l'argument selon son type
+** Les fonctions qui récupèrent l'argument selon son type
 */
 
 int			ft_printf(const char *restrict format, ...);

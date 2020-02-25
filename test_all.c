@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:50:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 16:02:17 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 13:04:11 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include <limits.h>
 #include <locale.h>
 #include <stdio.h>
-#include "../libft/libft.h"
-#include "../src/ft_printf.h"
- #include <wchar.h>
+#include "./libft/libft.h"
+#include "src/ft_printf.h"
+#include <wchar.h>
 
 void print_binaire(unsigned wc) //
 {
@@ -1501,7 +1501,7 @@ printf("\n\n\n\t\t\t..-* CHAR C *-..\n");
 	printf(" |%-*c|\n", 30, c);
 	ft_printf("f|%-*c|\n\n", 30, c);
 
-*/printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
+printf("\n\n\n\t\t\t..-* CHAR C  with %%lc *-..\n");
 
 
 	// CHAR 0 | 'c' | 0 a 256 au dessus |
@@ -1515,7 +1515,7 @@ printf("\n\n\n\t\t\t..-* CHAR C *-..\n");
 
 	//	printf("|%.0lc|\n", c);
 	//	ft_printf("|%.0lc|\n", c);
-
+	ft_strlen("");
 	printf("\n\n*------------------------------------------------------*\n");
 	printf("*** **  *** 	CAS		[ %%xd ]	avec x positif:  // 1\n\n");
 
@@ -1604,7 +1604,7 @@ printf("\n\n\n\t\t\t..-* L STRING  unicode *-..\n");
 
 	ws = L"语";
 	//ws = L"123456789";
-/*
+
 	a = printf( "%ls\n", ws);
 	b = ft_printf( "%ls\n\n", ws);
 	print_error(a, b);
@@ -1620,7 +1620,7 @@ printf("\n\n\n\t\t\t..-* L STRING  unicode *-..\n");
 	a = printf( " |%4ls|\n", ws);
 	b = ft_printf( " |%4ls|\n\n", ws);
 	print_error(a, b);
-*/
+
 
 
 
@@ -2251,7 +2251,7 @@ printf("\n\n\n\t\t\t..-* L STRING  unicode *-..\n");
 
 
 
-/*printf("\n\n\n\t\t\t..-* HEXADECIMAL *-..\n");
+printf("\n\n\n\t\t\t..-* HEXADECIMAL *-..\n");
 
 	int x;
 
@@ -2259,11 +2259,11 @@ printf("\n\n\n\t\t\t..-* L STRING  unicode *-..\n");
 
 	//x = -150;
 	//x = 150;
-	x = 179383791;
+	//x = 179383791;
 	//x = INTMAX;
 	//x = INTMIN;
 	//x = 1;
-	//x = 0;
+	x = 0;
 
 	printf(" |%lx|\n", 140731234556040 );
 	ft_printf("f|%lx|\n\n", 140731234556040 );
@@ -2812,92 +2812,93 @@ printf("\n\n\n\t\t\t..-* ADRESSE *-..\n");
 	printf("%d ",	printf(" |%-*p|\n", 30, p));
 	ft_printf("%d", ft_printf("f|%-*p|\n", 30, p));
 
-*/printf("\n\n\n\t\t\t..-* CUMUL *-..\n");
+/*printf("\n\n\n\t\t\t..-* CUMUL *-..\n");
 
 
-int cumul_x = 179383791;
-char cumul_c = 'c';
-char *cumul_s = "this is cumul chaine";
-void *cumul_ad = &cumul_x;
-int result;
-int result2;
+	int cumul_x = 179383791;
+	char cumul_c = 'c';
+	char *cumul_s = "this is cumul chaine";
+	void *cumul_ad = &cumul_x;
+	int result;
+	int result2;
 
-result = printf("le int max = %d\nuint max = %u\nune adresse = %p\nun hexadecimal = %x et %X\nune chaine = %s\nun char = %c\n\n",
-	INTMAX, UMAX, cumul_ad, cumul_x, cumul_x, cumul_s, cumul_c);
+	result = printf("le int max = %d\nuint max = %u\nune adresse = %p\nun hexadecimal = %x et %X\nune chaine = %s\nun char = %c\n\n",
+		INTMAX, UMAX, cumul_ad, cumul_x, cumul_x, cumul_s, cumul_c);
 
-result2 = ft_printf("le int max = %d\nuint max = %u\nune adresse = %p\nun hexadecimal = %x et %X\nune chaine = %s\nun char = %c\n\n",
-	INTMAX, UMAX, cumul_ad, cumul_x, cumul_x, cumul_s, cumul_c);
+	result2 = ft_printf("le int max = %d\nuint max = %u\nune adresse = %p\nun hexadecimal = %x et %X\nune chaine = %s\nun char = %c\n\n",
+		INTMAX, UMAX, cumul_ad, cumul_x, cumul_x, cumul_s, cumul_c);
 
-ft_printf("result 1 = %d\n result 2 = %d\n", result, result2);
-
-
-/*
-result = printf(" |%lhhlt|\n");
-result2 = ft_printf("f|%lhhlt|\n");
-ft_printf("result 1 = %d\nresult 2 = %d\n", result, result2);
-
-printf(" |%llu|\n", ULLONG_MAX);
-ft_printf("f|%llu|\n", (unsigned long long)~0);
-ft_printf("f|%llu|\n", ULLONG_MAX);
-
-printf("%u\n", (unsigned int)~0);
-ft_printf("%u\n", (unsigned int)~0);
-
-//printf("%d\n", (int)~(~(0) >> 1));
-//ft_printf("%d\n", (int)(-1 >> 1));
-
-printf("%lu\n", (unsigned long)~0);
-ft_printf("%lu\n", (unsigned long)~0);
-
-printf("%ld\n", (long)~0);
-ft_printf("%ld\n", (long)~0);
-
-//printf(" |%15.*% milieu %d|\n", 10, 25);
-//ft_printf("f|%15.*% milieu %d|\n",10, 25);
+	ft_printf("result 1 = %d\n result 2 = %d\n", result, result2);
 
 
-printf(" |%lld|\n", cumul_ad);
-ft_printf("f|%lld|\n\n", cumul_ad);
-
-printf(" |%lld|\n", cumul_ad);
-ft_printf("f|%lld|\n\n", cumul_ad);
-
-printf(" |%llx|\n", cumul_ad);
-ft_printf("f|%llx|\n\n", cumul_ad);
-
-printf(" |%p|\n", cumul_ad);
-ft_printf("f|%p|\n\n", cumul_ad);
-
-printf(" |%p|\n", NULL);
-ft_printf("f|%p|\n\n", NULL);
-
-printf("\\%c\n", 98);
-ft_printf("\\%c\n", 98);
-
-printf("%\\c\n", 98);
-ft_printf("%\\c\n", 98);
 
 
-	int nbr;
+	result = printf(" |%lhhlt|\n");
+	result2 = ft_printf("f|%lhhlt|\n");
+	ft_printf("result 1 = %d\nresult 2 = %d\n", result, result2);
 
-	printf("|%1.0d|\n", 0);
-	ft_printf("|%1.0d|\n\n", 0);
+	printf(" |%llu|\n", ULLONG_MAX);
+	ft_printf("f|%llu|\n", (unsigned long long)~0);
+	ft_printf("f|%llu|\n", ULLONG_MAX);
 
-//	printf("|%08.3d|\n", -45);
-//	ft_printf("|%08.3d|\n\n", -45);
+	printf("%u\n", (unsigned int)~0);
+	ft_printf("%u\n", (unsigned int)~0);
 
-	printf("|%05d|\n", -45);
-	ft_printf("|%05d|\n\n", -45);
+	//printf("%d\n", (int)~(~(0) >> 1));
+	//ft_printf("%d\n", (int)(-1 >> 1));
 
-	nbr = printf("|%-8c|\n", 'g');
-	printf("%d\n", nbr);
-	nbr = ft_printf("|%-8c|\n", 'g');
-	printf("%d\n", nbr);
+	printf("%lu\n", (unsigned long)~0);
+	ft_printf("%lu\n", (unsigned long)~0);
 
-	nbr =  printf("%%");
-	printf("\n");
-	nbr = ft_printf("%%");
-	printf("\n");
+	printf("%ld\n", (long)~0);
+	ft_printf("%ld\n", (long)~0);
+
+	//printf(" |%15.*% milieu %d|\n", 10, 25);
+	//ft_printf("f|%15.*% milieu %d|\n",10, 25);
+
+
+	printf(" |%lld|\n", cumul_ad);
+	ft_printf("f|%lld|\n\n", cumul_ad);
+
+	printf(" |%lld|\n", cumul_ad);
+	ft_printf("f|%lld|\n\n", cumul_ad);
+
+	printf(" |%llx|\n", cumul_ad);
+	ft_printf("f|%llx|\n\n", cumul_ad);
+
+	printf(" |%p|\n", cumul_ad);
+	ft_printf("f|%p|\n\n", cumul_ad);
+
+	printf(" |%p|\n", NULL);
+	ft_printf("f|%p|\n\n", NULL);
+
+	printf("\\%c\n", 98);
+	ft_printf("\\%c\n", 98);
+
+	printf("%\\c\n", 98);
+	ft_printf("%\\c\n", 98);
+
+
+		int nbr;
+
+		printf("|%1.0d|\n", 0);
+		ft_printf("|%1.0d|\n\n", 0);
+
+	//	printf("|%08.3d|\n", -45);
+	//	ft_printf("|%08.3d|\n\n", -45);
+
+		printf("|%05d|\n", -45);
+		ft_printf("|%05d|\n\n", -45);
+
+		nbr = printf("|%-8c|\n", 'g');
+		printf("%d\n", nbr);
+		nbr = ft_printf("|%-8c|\n", 'g');
+		printf("%d\n", nbr);
+
+		nbr =  printf("%%");
+		printf("\n");
+		nbr = ft_printf("%%");
+		printf("\n");
 */
 /*
 				printf(" |%x|\n", -42);
@@ -2966,8 +2967,8 @@ ft_printf("%\\c\n", 98);
 	ft_printf("f|%llu|\n\n", -1);
 */
 
-//	printf(" |%llx|\n", 140731234556040 );
-//	ft_printf("f|%llx|\n\n", 140731234556040 );
+	//	printf(" |%llx|\n", 140731234556040 );
+	//	ft_printf("f|%llx|\n\n", 140731234556040 );
 
 /*	printf("%lllkkkk\n", 5);
 	ft_printf("%lllkkkk\n", 5);
@@ -3025,9 +3026,66 @@ ft_printf("%\\c\n", 98);
 	ft_printf("ls wchar * = %ls\n\n", str2_unicode);
 
 
-//		printf(" |%c\n", 98);
-//	ft_printf("f|%c\n", 98);
+	//		printf(" |%c\n", 98);
+	//	ft_printf("f|%c\n", 98);
+
+	printf(" |%d\n", printf(""));
+  	printf("f|%d\n",ft_printf(""));
 */
+/*
+	int *e = NULL;
+
+	a = printf("f|%p\n", e);
+	b = ft_printf(" |%p\n\n", e);
+	print_error(a, b);
+
+	a = printf("f|%p\n", NULL);
+	b = ft_printf(" |%p\n\n", NULL);
+	print_error(a, b);
+
+
+	a = printf("f|%p\n", (void *)0);
+	b = ft_printf(" |%p\n\n", (void *)0);
+	print_error(a, b);
+	
+
+*/
+	a = printf("|%5%|\n"); 
+	b = ft_printf("|%5%|\n\n");
+	print_error(a, b); 
+	
+	a = printf("|%-5%|\n"); 
+	b = ft_printf("|%-5%|\n\n");
+	print_error(a, b);
+
+	a = printf("%x\n", 42);
+	b = ft_printf("%x\n\n", 42);
+	print_error(a, b);
+
+	a = printf(" |%2c|\n", 0);
+	b = ft_printf("f|%2c|\n\n", 0);
+	print_error(a, b);
+
+	a = printf(" |%1c|\n", 0);
+	b = ft_printf("f|%1c|\n\n", 0);
+	print_error(a, b);
+
+	a = printf(" |%4c|\n", 0);
+	b = ft_printf("f|%4c|\n\n", 0);
+	print_error(a, b);
+
+	a = printf(" |%4c|\n", 'g');
+	b = ft_printf("f|%4c|\n\n", 'g');
+	print_error(a, b);
+
+	a = printf(" |%2c|\n", 'g');
+	b = ft_printf("f|%2c|\n\n", 'g');
+	print_error(a, b);
+
+	a = printf("%2c", 0);
+	b = ft_printf("%2c\n", 0);
+	print_error(a, b);
+
 return (0);
 
 }

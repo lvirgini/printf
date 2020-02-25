@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 14:12:08 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/24 17:12:41 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 12:46:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		type_dispatch(const char *format, int i, va_list args)
 		return (1);
 	}
 	if (format[i] == '%')
-	{	
+	{
 		g_flag->uarg = '%';
 		print_character();
 	}

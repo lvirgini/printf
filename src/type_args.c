@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 16:09:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/24 17:15:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 12:51:18 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int		type_classic(const char *format, int i, va_list args)
 	else if ((ft_strchr("cuxX", format[i])))
 		g_flag->uarg = (unsigned int)va_arg(args, unsigned int);
 	else if ((format[i] == 'p'))
-		g_flag->uarg = (ULL)va_arg(args, ULL);
+		g_flag->uarg = (t_ull)va_arg(args, t_ull);
 	else if ((format[i] == 's'))
 		g_flag->s = va_arg(args, char *);
-	else if((format[i] == '%'))
+	else if ((format[i] == '%'))
 		;
 	else
 		g_flag->arg_error = 1;
@@ -69,7 +69,7 @@ int		type_long(const char *format, int i, va_list args)
 		if ((ft_strchr("di", format[i + 2])))
 			g_flag->arg = (long long)va_arg(args, long long);
 		else if ((ft_strchr("uxX", format[i + 2])))
-			g_flag->uarg = (ULL)va_arg(args, ULL);
+			g_flag->uarg = (t_ull)va_arg(args, t_ull);
 		else
 			g_flag->arg_error = 1;
 		return (i + 2);
