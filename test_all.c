@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:50:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/25 13:04:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/25 15:21:44 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -3048,8 +3048,8 @@ printf("\n\n\n\t\t\t..-* ADRESSE *-..\n");
 	b = ft_printf(" |%p\n\n", (void *)0);
 	print_error(a, b);
 	
-
 */
+
 	a = printf("|%5%|\n"); 
 	b = ft_printf("|%5%|\n\n");
 	print_error(a, b); 
@@ -3058,7 +3058,35 @@ printf("\n\n\n\t\t\t..-* ADRESSE *-..\n");
 	b = ft_printf("|%-5%|\n\n");
 	print_error(a, b);
 
-	a = printf("%x\n", 42);
+	a = printf("|%-05%|\n"); 
+	b = ft_printf("|%-05%|\n\n");
+	print_error(a, b);
+
+	a = printf("|%05%|\n");
+	b = ft_printf("|%05%|\n\n");
+	print_error(a, b);
+
+		a = printf("|%0.5%|\n");
+	b = ft_printf("|%0.5%|\n\n");
+	print_error(a, b);
+
+	a = printf("|%025.10%|\n");
+	b = ft_printf("|%025.10%|\n\n");
+	print_error(a, b);
+
+	a = printf("|%02.10%|\n");
+	b = ft_printf("|%02.10%|\n\n");
+	print_error(a, b);
+
+		a = printf("|%05.%|\n");
+	b = ft_printf("|%05.%|\n\n");
+	print_error(a, b);
+
+		a = printf("|%05.0%|\n");
+	b = ft_printf("|%05.0%|\n\n");
+	print_error(a, b);
+
+/*	a = printf("%x\n", 42);
 	b = ft_printf("%x\n\n", 42);
 	print_error(a, b);
 
@@ -3086,6 +3114,49 @@ printf("\n\n\n\t\t\t..-* ADRESSE *-..\n");
 	b = ft_printf("%2c\n", 0);
 	print_error(a, b);
 
+
+	//char *s_hidden = "hi low\0don't print me lol\0";
+
+	//a = printf("|%09s|\n", s_hidden);
+	//b = ft_printf("|%09s|\n\n", s_hidden);
+	//print_error(a, b);
+
+	a = printf("|%.p|\n", NULL);
+	b = ft_printf("|%.p|\n\n", NULL);
+	print_error(a, b);
+
+	a = printf("|%.0p|\n", NULL);
+	b = ft_printf("|%.0p|\n\n", NULL);
+	print_error(a, b);
+
+	a = printf("|%.1p|\n", NULL);
+	b = ft_printf("|%.1p|\n\n", NULL);
+	print_error(a, b);
+
+	a = printf("|%.x|\n", 150);
+	b = ft_printf("|%.x|\n\n", 150);
+	print_error(a, b);
+
+	a = printf("|%.d|\n", 15);
+	b = ft_printf("|%.d|\n\n", 15);
+	print_error(a, b);
+
+	a = printf("|%.d|\n", 15);
+	b = ft_printf("|%.d|\n\n", 15);
+	print_error(a, b);
+
+		a = printf("|%p|\n", 150);
+		b = ft_printf("|%p|\n\n", 150);
+	print_error(a, b);
+
+	a = printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n",(char)128,(char)129,(char)130,(char)131,(char)132,(char)133,(char)134,(char)135,(char)136,(char)137,(char)138,(char)139,(char)140,(char)141,(char)142,(char)143,(char)144,(char)145,(char)146,(char)147,(char)148,(char)149,(char)150,(char)151,(char)152,(char)153,(char)154,(char)155,(char)156,(char)157,(char)158,(char)159,(char)160,(char)161,(char)162,(char)163,(char)164,(char)165,(char)166,(char)167,(char)168,(char)169,(char)170,(char)171,(char)172,(char)173,(char)174,(char)175,(char)176,(char)177,(char)178,(char)179,(char)180,(char)181,(char)182,(char)183,(char)184,(char)185,(char)186,(char)187,(char)188,(char)189,(char)190,(char)191,(char)192,(char)193,(char)194,(char)195,(char)196,(char)197,(char)198,(char)199,(char)200,(char)201,(char)202,(char)203,(char)204,(char)205,(char)206,(char)207,(char)208,(char)209,(char)210,(char)211,(char)212,(char)213,(char)214,(char)215,(char)216,(char)217,(char)218,(char)219,(char)220,(char)221,(char)222,(char)223,(char)224,(char)225,(char)226,(char)227,(char)228,(char)229,(char)230,(char)231,(char)232,(char)233,(char)234,(char)235,(char)236,(char)237,(char)238,(char)239,(char)240,(char)241,(char)242,(char)243,(char)244,(char)245,(char)246,(char)247,(char)248,(char)249,(char)250,(char)251,(char)252,(char)253,(char)254,(char)255);
+	b = ft_printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n\n",(char)128,(char)129,(char)130,(char)131,(char)132,(char)133,(char)134,(char)135,(char)136,(char)137,(char)138,(char)139,(char)140,(char)141,(char)142,(char)143,(char)144,(char)145,(char)146,(char)147,(char)148,(char)149,(char)150,(char)151,(char)152,(char)153,(char)154,(char)155,(char)156,(char)157,(char)158,(char)159,(char)160,(char)161,(char)162,(char)163,(char)164,(char)165,(char)166,(char)167,(char)168,(char)169,(char)170,(char)171,(char)172,(char)173,(char)174,(char)175,(char)176,(char)177,(char)178,(char)179,(char)180,(char)181,(char)182,(char)183,(char)184,(char)185,(char)186,(char)187,(char)188,(char)189,(char)190,(char)191,(char)192,(char)193,(char)194,(char)195,(char)196,(char)197,(char)198,(char)199,(char)200,(char)201,(char)202,(char)203,(char)204,(char)205,(char)206,(char)207,(char)208,(char)209,(char)210,(char)211,(char)212,(char)213,(char)214,(char)215,(char)216,(char)217,(char)218,(char)219,(char)220,(char)221,(char)222,(char)223,(char)224,(char)225,(char)226,(char)227,(char)228,(char)229,(char)230,(char)231,(char)232,(char)233,(char)234,(char)235,(char)236,(char)237,(char)238,(char)239,(char)240,(char)241,(char)242,(char)243,(char)244,(char)245,(char)246,(char)247,(char)248,(char)249,(char)250,(char)251,(char)252,(char)253,(char)254,(char)255);
+	print_error(a, b);
+
+	a = printf(" |%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c|\n",' ','!','"','#','$','%','&','\'','(',')','*','+',',','-','.','/','0','1','2','3','4','5','6','7','8','9',':',';','<','=','>','?','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','[','\\',']','^','_','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','{','|','}','~','');
+	b = ft_printf("f|%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c%-2c%-3c%-4c%-1c|\n\n",' ','!','"','#','$','%','&','\'','(',')','*','+',',','-','.','/','0','1','2','3','4','5','6','7','8','9',':',';','<','=','>','?','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','[','\\',']','^','_','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','{','|','}','~','');
+	print_error(a, b);
+   */
 return (0);
 
 }
