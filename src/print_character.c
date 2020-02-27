@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:28:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/25 19:18:27 by lvirgini         ###   ########.fr       */
+/*   Updated: 2020/02/27 13:04:17 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	print_percent(void)
 	{
 		g_flag->width -= 1;
 		g_flag->total_print += g_flag->width;
-		if ((g_flag->zero == 1 && g_flag->precision != -1) && g_flag->left == 0)
+		if ((g_flag->zero == 1) && g_flag->left == 0)
 			ft_memset((char *)s, '0', g_flag->width);
 		else
 			ft_memset((char *)s, ' ', g_flag->width);
